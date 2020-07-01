@@ -11,14 +11,9 @@ import javax.ws.rs.core.UriBuilder;
 
 
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
-
-
 import org.glassfish.jersey.client.ClientConfig;
 
-//simple JSON
-import org.json.simple.JSONArray; 
-import org.json.simple.JSONObject; 
+import org.json.simple.JSONObject;
 import org.json.simple.parser.*; 
 
 import javax.xml.ws.http.HTTPException;
