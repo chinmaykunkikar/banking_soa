@@ -5,7 +5,6 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
 
-
 import java.io.IOException;
 import java.net.URI;
 
@@ -18,7 +17,9 @@ public class mainEventSync {
     public static final String BASE_URI = "http://localhost:8084/mybank/";
 
     /**
-     * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
+     * Starts Grizzly HTTP server exposing JAX-RS resources defined in this
+     * application.
+     * 
      * @return Grizzly HTTP server.
      */
     public static HttpServer startServer() {
@@ -27,28 +28,26 @@ public class mainEventSync {
         final ResourceConfig rc = new ResourceConfig().packages("mybank");
 
         // create and start a new instance of grizzly http server
-        // exposing the Jers	ey application at BASE_URI
+        // exposing the Jers ey application at BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
-		
+
     }
-	
-	
 
     /**
      * Main method.
+     * 
      * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
-		
-		server.getServerConfiguration().addHttpHandler(new StaticHttpHandler("E:\\bank_soa\\mybankwebsite\\"),"/");   
-	
-		
-        System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+
+        server.getServerConfiguration().addHttpHandler(new StaticHttpHandler("E:\\bank_soa\\mybankwebsite\\"), "/");
+
+        System.out.println(String.format(
+                "Jersey app started with WADL available at " + "%sapplication.wadl\nHit enter to stop it...",
+                BASE_URI));
         System.in.read();
         server.shutdownNow();
     }
 }
-

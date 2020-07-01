@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
 	<title>MYBANK account PAGE</title>
 	<script src="./scripts/angular.1.7.8.js"></script>
@@ -7,106 +8,117 @@
 
 
 <h1 align=center>MYBANK ACCOUNTS</h1>
+
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
-<form id="frm" name="frm">
-			
-			<div align=center>
-				
-				<hr>
-				account ID: &nbsp;<input id="accountid" type="text" name="accountid" ng-model="form.account._ID" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<form id="frm" name="frm">
 
-				account Name: &nbsp;<input id="accountname" type="text" name="accountname" ng-model="form.account.name" />
-				<hr>
-				<br>
-				<button name="btnselect" ng-click="data.account.selectquery();">Read</button>
-				&nbsp;&nbsp;
-				<button name="btnupdate" ng-click="data.account.updatequery();">Update</button>
-				&nbsp;&nbsp;
-				<button name="btndelete" ng-click="data.account.deletequery();">Delete</button>
-				&nbsp;&nbsp;
-				<button name="btninsert" ng-click="data.account.insertquery();">Create</button>
-				
-			</div>
-	
-	<br>
-	<hr>
-	
-	<div align=center>
-		<br><b>account LIST</b>
-		<br>
+		<div align=center>
 
-		<table align="center">
-		
-			<tr>
-				<td align="center">ID</td>
-				<td align="center">ACCOUNT NAME</td>
-				<td align="center">BALANCE</td>
-				
-			</tr>
-			<tr><td colspan=100%><hr></td></tr>
-			<tr style="color:blue;" ng-repeat="account in data.queryresponse">
-				<td align="center">{{account._ID}}</td>
-				<td align="center">{{account.accountname}}</td>
-				<td align="center">{{account.accountbalance}}</td>
-				
-			</tr>
-			
-		</table>
-	</div>
+			<hr>
+			account ID: &nbsp;<input id="accountid" type="text" name="accountid"
+				ng-model="form.account._ID" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-	<div align=center>
+			account Name: &nbsp;<input id="accountname" type="text" name="accountname" ng-model="form.account.name" />
+			<hr>
+			<br>
+			<button name="btnselect" ng-click="data.account.selectquery();">Read</button>
+			&nbsp;&nbsp;
+			<button name="btnupdate" ng-click="data.account.updatequery();">Update</button>
+			&nbsp;&nbsp;
+			<button name="btndelete" ng-click="data.account.deletequery();">Delete</button>
+			&nbsp;&nbsp;
+			<button name="btninsert" ng-click="data.account.insertquery();">Create</button>
+
+		</div>
+
 		<br>
 		<hr>
-		<a href="mybank.html">Back to Main Menu</a>
-		<br/>
-		
-		<hr/>
-		<button name="btnvieweventlog" ng-click="data.account.vieweventlog();">View Event Log</button>
-		<button name="btnhideeventlog" ng-click="hideeventlog();">Hide Event/Debug</button>
-		
-		<br/>
-		<br/>
-		
-		<div id="eventlog" ng-show="showeventlog==1">
-		<table align="center" >
-		
-			<tr>
-				<td align="center">DATE-TIME</td>
-				<td align="center">SOURCE</td>
-				<td align="center">DESTINATION</td>
-				<td align="center">STATUS</td>
-				<td align="center">DIRECTION</td>
-				<td align="center">EVENT DATA</td>
-			
-			</tr>
-			<tr><td colspan=100%><hr></td></tr>
-			
-			<tr style="color:brown;" ng-repeat="event in account.eventlog">
-				<td align="center">{{event.createdate}}</td>
-				<td align="center">{{event.eventsource}}</td>
-				<td align="center">{{event.eventdestination}}</td>
-				<td align="center">{{event.eventstatus}}</td>
-				<td align="center">{{event.eventdirection}}</td>
-				<td align="center">{{event.eventdata}}</td>
-				
-			</tr>
-			
-		</table>
-		</div>		
-		<hr/>
-	</div>
-</form>
 
+		<div align=center>
+			<br><b>account LIST</b>
+			<br>
 
-<div id="debug" ng-show="showeventlog==1" align="center" style="background-color:darkgrey;color:white;">
-			<br><font color=black><b>DEBUG</b></font>
-				<br>eventquery: {{data.eventquery}}
-				<br>query: {{data.query}}
-				<br>querytype: {{data.querytype}}
-				<br>fired query status: {{msg}}
-				
-				
-				
+			<table align="center">
+
+				<tr>
+					<td align="center">ID</td>
+					<td align="center">ACCOUNT NAME</td>
+					<td align="center">BALANCE</td>
+
+				</tr>
+				<tr>
+					<td colspan=100%>
+						<hr>
+					</td>
+				</tr>
+				<tr style="color:blue;" ng-repeat="account in data.queryresponse">
+					<td align="center">{{account._ID}}</td>
+					<td align="center">{{account.accountname}}</td>
+					<td align="center">{{account.accountbalance}}</td>
+
+				</tr>
+
+			</table>
+		</div>
+
+		<div align=center>
+			<br>
+			<hr>
+			<a href="mybank.html">Back to Main Menu</a>
+			<br />
+
+			<hr />
+			<button name="btnvieweventlog" ng-click="data.account.vieweventlog();">View Event Log</button>
+			<button name="btnhideeventlog" ng-click="hideeventlog();">Hide Event/Debug</button>
+
+			<br />
+			<br />
+
+			<div id="eventlog" ng-show="showeventlog==1">
+				<table align="center">
+
+					<tr>
+						<td align="center">DATE-TIME</td>
+						<td align="center">SOURCE</td>
+						<td align="center">DESTINATION</td>
+						<td align="center">STATUS</td>
+						<td align="center">DIRECTION</td>
+						<td align="center">EVENT DATA</td>
+
+					</tr>
+					<tr>
+						<td colspan=100%>
+							<hr>
+						</td>
+					</tr>
+
+					<tr style="color:brown;" ng-repeat="event in account.eventlog">
+						<td align="center">{{event.createdate}}</td>
+						<td align="center">{{event.eventsource}}</td>
+						<td align="center">{{event.eventdestination}}</td>
+						<td align="center">{{event.eventstatus}}</td>
+						<td align="center">{{event.eventdirection}}</td>
+						<td align="center">{{event.eventdata}}</td>
+
+					</tr>
+
+				</table>
 			</div>
+			<hr />
+		</div>
+	</form>
+
+
+	<div id="debug" ng-show="showeventlog==1" align="center" style="background-color:darkgrey;color:white;">
+		<br>
+		<font color=black><b>DEBUG</b></font>
+		<br>eventquery: {{data.eventquery}}
+		<br>query: {{data.query}}
+		<br>querytype: {{data.querytype}}
+		<br>fired query status: {{msg}}
+
+
+
+	</div>
 
 </body>

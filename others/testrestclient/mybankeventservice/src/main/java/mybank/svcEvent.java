@@ -36,8 +36,8 @@ public class svcEvent {
   @GET
   @Produces(MediaType.TEXT_HTML)
   public String sayHtmlHello() {
-    return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-        + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
+    return "<html> " + "<title>" + "Hello Jersey" + "</title>" + "<body><h1>" + "Hello Jersey" + "</body></h1>"
+        + "</html> ";
   }
 
 }
