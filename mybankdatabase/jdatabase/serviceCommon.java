@@ -12,12 +12,9 @@ import java.io.FileWriter;
 
 /* class to have all common functions */
 public class serviceCommon {
-
 	public static void main(String[] args) throws IOException {
-
-		System.out.println("Reading JSON ..");
-		System.out.println("websitefolder=" + getJSONStringValuefromFile("dbconfig.json", "websitefolder"));
-
+		System.out.println("Reading JSON");
+		System.out.println("Website folder:" + getJSONStringValuefromFile("dbconfig.json", "websitefolder"));
 	}
 
 	public static String getJSONStringValuefromFile(String filename, String node) {
@@ -25,13 +22,10 @@ public class serviceCommon {
 
 		try (FileReader config = new FileReader(filename)) {
 			Object obj = new JSONParser().parse(config);
-
 			// typecasting obj to JSONObject
 			JSONObject jo = (JSONObject) obj;
-
 			// getting firstName and lastName
 			nodevalue = (String) jo.get(node);
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
