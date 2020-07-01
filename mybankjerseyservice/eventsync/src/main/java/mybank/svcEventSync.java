@@ -116,7 +116,7 @@ public class svcEventSync {
 	}
 
 	public void broadcastEvent(String event) {
-		System.out.println("broadcasting event");
+		System.out.println("Broadcasting event");
 		// read the json event;
 		// get all services uri from dbConfig file
 		// check source destination
@@ -126,11 +126,10 @@ public class svcEventSync {
 		String uri = "http://localhost:8082/mybank/account/syncevent";
 		eventclient.broadcastEvent(event, uri);
 
-		/*
-		 * 
-		 * uri = "http://localhost:8083/mybank/moneytransfer/syncevent";
-		 * eventclient.broadcastEvent(event, uri);
-		 * 
+		uri = "http://localhost:8083/mybank/moneytransfer/syncevent";
+		eventclient.broadcastEvent(event, uri);
+
+		 /* 
 		 * uri = "http://localhost:8081/mybank/customer/syncevent";
 		 * eventclient.broadcastEvent(event, uri);
 		 * 

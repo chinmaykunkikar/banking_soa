@@ -50,7 +50,7 @@ public class svcCustomer {
 
 		String jsonresult = "";
 
-		System.out.println("svcCustomer executequery called");
+		//System.out.println("svcCustomer executequery called");
 
 		try {
 
@@ -68,7 +68,7 @@ public class svcCustomer {
 
 			jsonresult = db.executequery(query, querytype); // return json result from the query
 
-			System.out.println("svcCustomer executequery result=" + jsonresult);
+			System.out.println("svcCustomer executequery result: " + jsonresult);
 
 			// at present we are just forwarding the query and querytype as it is received
 			// we may have to create a standard json data for events which contains source,
@@ -103,7 +103,6 @@ public class svcCustomer {
 		// connect to event service
 		// send event to event sync
 		eventclient.sendEvent(eventdata);
-
 	}
 
 	// sync the event locally as received from event synchronizer
@@ -111,7 +110,6 @@ public class svcCustomer {
 		// connect to event service
 		// sync event into local database
 		eventclient.syncEvent(eventdata, db);
-
 	}
 
 }

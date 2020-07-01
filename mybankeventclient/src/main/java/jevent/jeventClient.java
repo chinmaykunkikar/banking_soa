@@ -35,7 +35,7 @@ public class jeventClient {
 
 	// can test the sql independently from command prompt too
 	public static void main(String args[]) {
-		System.out.println("event client is initialized sync events at " + eventsyncURI);
+		System.out.println("Event client is initialized sync events at: " + eventsyncURI);
 	}
 
 	public Response sendevent(JSONObject inputJsonObj) {
@@ -63,7 +63,7 @@ public class jeventClient {
 			output = resp.readEntity(String.class);
 			System.out.println(output);
 		} catch (Exception e) {
-			System.out.println("returning sendevent failure");
+			System.out.println("Returning sendevent failure");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
 			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
 		}
@@ -95,7 +95,7 @@ public class jeventClient {
 				+ " eventdirection, " + " eventid, " + " eventsource) " + " VALUES (" + "'" + eventdata + "'" + ","
 				+ "'" + eventsource + "'" + "," + "0" + "," + "2" + "," + "-1" + "," + "'" + "unknown" + "'" + ");";
 
-		System.out.println("query to be fired =" + query);
+		System.out.println("Query to be fired: " + query);
 
 		jsonresult = db.executequery(query, querytype); // return json result from the query
 
@@ -109,8 +109,7 @@ public class jeventClient {
 		String output = "";
 
 		try {
-
-			System.out.println("broadcasting to service at :" + uri);
+			System.out.println("Broadcasting to service at: " + uri);
 
 			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
 			Object obj = new JSONParser().parse(data);
@@ -124,7 +123,7 @@ public class jeventClient {
 			output = resp.readEntity(String.class);
 			System.out.println(output);
 		} catch (Exception e) {
-			System.out.println("returning broadcast event failure");
+			System.out.println("Returning broadcast event failure");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
 			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
 		}

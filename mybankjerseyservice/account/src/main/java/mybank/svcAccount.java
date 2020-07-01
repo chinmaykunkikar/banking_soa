@@ -44,7 +44,7 @@ public class svcAccount {
 
 		String jsonresult = "";
 
-		System.out.println("svcAccount executequery called");
+		//System.out.println("svcAccount executequery called");
 
 		try {
 
@@ -62,7 +62,7 @@ public class svcAccount {
 
 			jsonresult = db.executequery(query, querytype); // return json result from the query
 
-			System.out.println("svcAccount executequery result=" + jsonresult);
+			System.out.println("svcAccount executequery result: " + jsonresult);
 
 		} catch (Exception e) {
 			System.out.println("returning post2 failure");
