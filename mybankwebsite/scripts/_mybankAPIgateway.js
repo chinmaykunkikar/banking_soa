@@ -58,7 +58,7 @@
 				$scope.headers = response.headers();
 			});
 
-		}; //executequery function
+		};
 
 		$scope.account.executequery = function () {
 			$http({
@@ -85,7 +85,7 @@
 				$scope.headers = response.headers();
 			});
 
-		}; //executequery function
+		};
 
 		$scope.data.customer.insertquery = function () {
 			var fieldvalues = "";
@@ -96,7 +96,7 @@
 			fieldvalues = "'" + $scope.form.customer.name + "'" + ",'" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "','0'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.customer.executequery();
-		}; //insertquery function
+		};
 
 		$scope.data.customer.deletequery = function () {
 			$scope.data.query = $scope.data.querytemplate.delete;
@@ -104,7 +104,7 @@
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.customer._ID);
 			$scope.customer.executequery();
-		}; //deletequery function
+		};
 
 		$scope.data.customer.updatequery = function () {
 			$scope.data.query = $scope.data.querytemplate.update;
@@ -114,7 +114,7 @@
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.updatefields);
 			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.customer._ID);
 			$scope.customer.executequery();
-		}; //updatequery function
+		};
 
 		$scope.data.customer.selectquery = function () {
 			$scope.data.query = $scope.data.querytemplate.read;
@@ -134,7 +134,7 @@
 			fieldvalues = "'" + $scope.form.account.name + "'" + ",'50000'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.account.executequery();
-		}; //insertquery function
+		};
 
 		$scope.data.account.deletequery = function () {
 			$scope.data.query = $scope.data.querytemplate.delete;
@@ -142,7 +142,7 @@
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.account._ID);
 			$scope.account.executequery();
-		}; //deletequery function
+		};
 
 		$scope.data.account.updatequery = function () {
 			$scope.data.query = $scope.data.querytemplate.update;
@@ -152,7 +152,7 @@
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.updatefields);
 			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.account._ID);
 			$scope.account.executequery();
-		}; //updatequery function
+		};
 
 		$scope.data.account.selectquery = function () {
 			$scope.data.query = $scope.data.querytemplate.read;

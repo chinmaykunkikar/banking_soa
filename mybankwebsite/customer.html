@@ -7,13 +7,11 @@
 </head>
 
 
-<h1 align=center>MYBANK CUSTOMER</h1>
+<h1 align=center>MyBank Customer</h1>
 
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
 	<form id="frm" name="frm">
-
 		<div align=center>
-
 			<hr>
 			ID: &nbsp;<input id="customerid" type="text" name="customerid" ng-model="form.customer._ID" />&nbsp;
 			Name: &nbsp;<input id="customername" type="text" name="customername" ng-model="form.customer.name" />&nbsp;
@@ -21,8 +19,7 @@
 				ng-model="form.customer.address" />&nbsp;
 			Phone: &nbsp;<input id="customerphone" type="text" name="customerphone"
 				ng-model="form.customer.phone" />&nbsp;
-
-			<hr>
+			<br>
 			<br>
 			<button name="btnselect" ng-click="data.customer.selectquery();">Read</button>
 			&nbsp;&nbsp;
@@ -31,18 +28,13 @@
 			<button name="btndelete" ng-click="data.customer.deletequery();">Delete</button>
 			&nbsp;&nbsp;
 			<button name="btninsert" ng-click="data.customer.insertquery();">Create</button>
-
 		</div>
-
 		<br>
 		<hr>
-
 		<div align=center>
 			<br><b>CUSTOMER LIST</b>
 			<br>
-
 			<table align="center">
-
 				<tr>
 					<td align="center">ID</td>
 					<td align="center">NAME</td>
@@ -62,7 +54,6 @@
 					<td align="center">{{customer.customerphone}}</td>
 					<td align="center">{{customer.customertype}}</td>
 				</tr>
-
 			</table>
 		</div>
 
@@ -77,7 +68,6 @@
 			<br>query: {{data.query}}
 			<br>querytype: {{data.querytype}}
 			<br>fired query status: {{msg}}
-
 		</div>
 	</form>
 </body>

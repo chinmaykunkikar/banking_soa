@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MyBank MoneyTransfer</title>
+    <script src="./scripts/angular.1.7.8.js"></script>
+    <script src="./scripts/_mybankAPIgateway.js"></script>
+</head>
+
+<h1 align=center>MyBank MoneyTransfer</h1>
+
+<body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
+    <form id="frm" name="frm">
+        <div align=center>
+            <hr>
+            ID: <input id="accountid" type="text" name="accountid" ng-model="form.account._ID" />&nbsp;
+            Name: <input id="accountname" type="text" name="accountname" ng-model="form.account.name" />&nbsp;
+            <br>
+            <br>
+            <button name="btnselect" ng-click="data.account.selectquery();">Read</button>
+            &nbsp;&nbsp;
+            <button name="btnupdate" ng-click="data.account.updatequery();">Update</button>
+            &nbsp;&nbsp;
+            <button name="btndelete" ng-click="data.account.deletequery();">Delete</button>
+            &nbsp;&nbsp;
+            <button name="btninsert" ng-click="data.account.insertquery();">Create</button>
+        </div>
+        <br>
+        <hr>
+        <div align=center>
+            <br><b>TRANSFERS LIST</b>
+            <br>
+            <table align="center">
+                <tr>
+                    <td align="center">ID</td>
+                    <td align="center">ACCOUNT NAME</td>
+                    <td align="center">BALANCE</td>
+                </tr>
+                <tr>
+                    <td colspan=100%>
+                        <hr>
+                    </td>
+                </tr>
+                <tr style="color:blue;" ng-repeat="account in data.queryresponse">
+                    <td align="center">{{account._ID}}</td>
+                    <td align="center">{{account.accountname}}</td>
+                    <td align="center">{{account.accountbalance}}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <hr>
+        <div align=center>
+            <a href="mybank.html">Back to Main Menu</a>
+        </div>
+    </form>
+</body>
+
+</html>

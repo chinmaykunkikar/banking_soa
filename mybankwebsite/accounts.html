@@ -7,15 +7,15 @@
 	<script src="./scripts/_mybankAPIgateway.js"></script>
 </head>
 
-<h1 align=center>MYBANK ACCOUNTS</h1>
+<h1 align=center>MyBank Accounts</h1>
 
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
 	<form id="frm" name="frm">
 		<div align=center>
 			<hr>
-			ID: &nbsp;<input id="accountid" type="text" name="accountid" ng-model="form.account._ID" />&nbsp;
-			Name: &nbsp;<input id="accountname" type="text" name="accountname" ng-model="form.account.name" />&nbsp;
-			<hr>
+			ID: <input id="accountid" type="text" name="accountid" ng-model="form.account._ID" />&nbsp;
+			Name: <input id="accountname" type="text" name="accountname" ng-model="form.account.name" />&nbsp;
+			<br>
 			<br>
 			<button name="btnselect" ng-click="data.account.selectquery();">Read</button>
 			&nbsp;&nbsp;
@@ -53,8 +53,8 @@
 			<br>
 			<hr>
 			<a href="mybank.html">Back to Main Menu</a>
-			<br />
-			<hr />
+			<br>
+			<br>
 			<button name="btnvieweventlog" ng-click="data.account.vieweventlog();">View Event Log</button>
 			<button name="btnhideeventlog" ng-click="hideeventlog();">Hide Event/Debug</button>
 			<br />
@@ -89,13 +89,13 @@
 		</div>
 	</form>
 
-	<div id="debug" ng-show="showeventlog==1" align="center" style="background-color:darkgrey;color:white;">
-		<br>
-		<font color=black><b>DEBUG</b></font>
-		<br>eventquery: {{data.eventquery}}
-		<br>query: {{data.query}}
-		<br>querytype: {{data.querytype}}
-		<br>fired query status: {{msg}}
+	<div id="debug" ng-show="showeventlog==1" align="center"
+		style="background-color:slategray;color:white; padding: 1%;">
+		<font color=firebrick><b>DEBUG</b></font>
+		<br><u>Event Query:</u> {{data.eventquery}}
+		<br><u>Query:</u></b> {{data.query}}
+		<br><u>Query Type:</u> {{data.querytype}}
+		<br><u>Fired Query Status:</u> {{msg}}
 	</div>
 </body>
 
