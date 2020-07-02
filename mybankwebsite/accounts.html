@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-	<title>MYBANK account PAGE</title>
+	<title>MyBank Account</title>
 	<script src="./scripts/angular.1.7.8.js"></script>
 	<script src="./scripts/_mybankAPIgateway.js"></script>
 </head>
@@ -11,14 +11,13 @@
 
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
 	<form id="frm" name="frm">
-
 		<div align=center>
-
 			<hr>
-			account ID: &nbsp;<input id="accountid" type="text" name="accountid"
-				ng-model="form.account._ID" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			account Name: &nbsp;<input id="accountname" type="text" name="accountname" ng-model="form.account.name" />
+			ID: &nbsp;<input id="accountid" type="text" name="accountid"
+				ng-model="form.account._ID" />&nbsp;
+			
+			Name: &nbsp;<input id="accountname" type="text" name="accountname"
+			    ng-model="form.account.name" />&nbsp;
 			<hr>
 			<br>
 			<button name="btnselect" ng-click="data.account.selectquery();">Read</button>
@@ -30,21 +29,17 @@
 			<button name="btninsert" ng-click="data.account.insertquery();">Create</button>
 
 		</div>
-
 		<br>
 		<hr>
-
 		<div align=center>
-			<br><b>account LIST</b>
+			<br><b>Accounts List</b>
 			<br>
 
 			<table align="center">
-
 				<tr>
 					<td align="center">ID</td>
 					<td align="center">ACCOUNT NAME</td>
 					<td align="center">BALANCE</td>
-
 				</tr>
 				<tr>
 					<td colspan=100%>
@@ -66,17 +61,13 @@
 			<hr>
 			<a href="mybank.html">Back to Main Menu</a>
 			<br />
-
 			<hr />
 			<button name="btnvieweventlog" ng-click="data.account.vieweventlog();">View Event Log</button>
 			<button name="btnhideeventlog" ng-click="hideeventlog();">Hide Event/Debug</button>
-
 			<br />
 			<br />
-
 			<div id="eventlog" ng-show="showeventlog==1">
 				<table align="center">
-
 					<tr>
 						<td align="center">DATE-TIME</td>
 						<td align="center">SOURCE</td>
@@ -84,7 +75,6 @@
 						<td align="center">STATUS</td>
 						<td align="center">DIRECTION</td>
 						<td align="center">EVENT DATA</td>
-
 					</tr>
 					<tr>
 						<td colspan=100%>
@@ -92,16 +82,14 @@
 						</td>
 					</tr>
 
-					<tr style="color:brown;" ng-repeat="event in account.eventlog">
+					<tr style="color:maroon;" ng-repeat="event in account.eventlog">
 						<td align="center">{{event.createdate}}</td>
 						<td align="center">{{event.eventsource}}</td>
 						<td align="center">{{event.eventdestination}}</td>
 						<td align="center">{{event.eventstatus}}</td>
 						<td align="center">{{event.eventdirection}}</td>
 						<td align="center">{{event.eventdata}}</td>
-
 					</tr>
-
 				</table>
 			</div>
 			<hr />
@@ -116,9 +104,6 @@
 		<br>query: {{data.query}}
 		<br>querytype: {{data.querytype}}
 		<br>fired query status: {{msg}}
-
-
-
 	</div>
 
 </body>
