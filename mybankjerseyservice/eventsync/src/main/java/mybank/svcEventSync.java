@@ -25,7 +25,7 @@ import jdatabase.*;
 import jevent.*;
 
 /**
- * Root resource (exposed at "svcCustomer" path)
+ * Root resource (exposed at "svcEventSync" path)
  */
 @Path("event")
 public class svcEventSync {
@@ -48,10 +48,9 @@ public class svcEventSync {
 	@Produces({ "application/json" })
 	@Consumes({ "application/json" })
 	public Response executequery(String data) {
-
 		String jsonresult = "";
 
-		System.out.println("svcCustomer executequery called");
+		System.out.println("svcEventSync executequery called");
 
 		try {
 			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
@@ -68,10 +67,10 @@ public class svcEventSync {
 
 			jsonresult = db.executequery(query, querytype); // return json result from the query
 
-			System.out.println("svcCustomer executequery result=" + jsonresult);
+			System.out.println("svcEventSync executequery result: " + jsonresult);
 
 		} catch (Exception e) {
-			System.out.println("returning post2 failure");
+			System.out.println("Returning Post2 failure -");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
 			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
 		}
@@ -92,7 +91,6 @@ public class svcEventSync {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getIt() {
 		return "<h2>Welcome to MyBank Event Synchronizer service</h2>";
-
 	}
 
 	/*
@@ -106,7 +104,6 @@ public class svcEventSync {
 	@Consumes({ "application/json" })
 	public void syncEvent(String event) {
 		try {
-
 			// first save the query in local database
 			eventclient.syncEvent(event, db); // save the event in dbEventSync
 			broadcastEvent(event);
@@ -126,14 +123,13 @@ public class svcEventSync {
 		String uri = "http://localhost:8082/mybank/account/syncevent";
 		eventclient.broadcastEvent(event, uri);
 
-		uri = "http://localhost:8083/mybank/moneytransfer/syncevent";
-		eventclient.broadcastEvent(event, uri);
-
-		 /* 
-		 * uri = "http://localhost:8081/mybank/customer/syncevent";
-		 * eventclient.broadcastEvent(event, uri);
-		 * 
-		 */
-
+	   /*
+ 		* uri = "http://localhost:8083/mybank/moneytransfer/syncevent";
+		* eventclient.broadcastEvent(event, uri);
+        *
+		* uri = "http://localhost:8081/mybank/customer/syncevent";
+		* eventclient.broadcastEvent(event, uri);
+		* 
+		*/
 	}
 }

@@ -44,8 +44,6 @@ public class svcAccount {
 
 		String jsonresult = "";
 
-		//System.out.println("svcAccount executequery called");
-
 		try {
 
 			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
@@ -65,7 +63,7 @@ public class svcAccount {
 			System.out.println("svcAccount executequery result: " + jsonresult);
 
 		} catch (Exception e) {
-			System.out.println("returning post2 failure");
+			System.out.println("Returning Post2 failure");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
 			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
 		}

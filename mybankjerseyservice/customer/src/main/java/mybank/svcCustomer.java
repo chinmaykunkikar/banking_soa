@@ -76,7 +76,7 @@ public class svcCustomer {
 			eventclient.sendEvent(data);
 
 		} catch (Exception e) {
-			System.out.println("returning post2 failure");
+			System.out.println("Returning Post2 failure");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
 			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
 		}

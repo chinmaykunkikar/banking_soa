@@ -63,7 +63,7 @@ public class jeventClient {
 			output = resp.readEntity(String.class);
 			System.out.println(output);
 		} catch (Exception e) {
-			System.out.println("Returning sendevent failure");
+			System.out.println("Returning sendevent failure -");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
 			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
 		}
@@ -99,7 +99,7 @@ public class jeventClient {
 
 		jsonresult = db.executequery(query, querytype); // return json result from the query
 
-		System.out.println("svcCustomer executequery result=" + jsonresult);
+		System.out.println("jeventClient executequery result: " + jsonresult);
 
 		return jsonresult;
 

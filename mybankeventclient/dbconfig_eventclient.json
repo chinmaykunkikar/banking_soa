@@ -3,6 +3,6 @@
 		"websitefolder":"E:\\bank_soa\\mybankwebsite\\",
 		"databasename":"dbAccount",
 		"databaseusername":"chinmay",
-		"databasepassword":"8087"	,
+		"databasepassword":"8087",
 		"databasetestquery":"SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('_id', _id)), ']') as jsonresult from tAccount;"
 }
