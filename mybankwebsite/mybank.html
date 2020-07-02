@@ -1,16 +1,37 @@
-
 <html>
 <head>
-<style>
-    body {margin: 50pt;}
-    h1 {text-align: center;}
-</style>
+    <script src="./scripts/_mytoolkit.js"></script>
+    <style>
+        body {
+            margin-top: 20pt;
+            margin-left: 200pt;
+            margin-right: 200pt;
+        }
+
+        h1 {
+            text-align: center;
+            color: firebrick
+        }
+
+        h5 {
+            text-align: right;
+            color: darkslategray;
+        }
+    </style>
 </head>
 <body>
-<h1>Welcome to MyBank</h1>
-<hr>
-<input type="button" value="Customer" onClick="window.location.href='customer.html'"/>
-<input type="button" value="Accounts" onClick="window.location.href='accounts.html'"/>
-<input type="button" value="Money Transfer" onClick="window.location.href='moneytransfer.html'" disabled/>
+    <h1>Welcome to MyBank</h1>
+    <hr>
+    <input type="button" id="customerBtn" value="Customer" onClick="window.location.href='customer.html'"
+        style="font-size : 12pt; width: 100pt; height: 20pt; margin-left: 200pt;" />
+    <input type="button" id="accountsBtn" value="Accounts" onClick="window.location.href='accounts.html'"
+        style="font-size : 12pt; width: 100pt; height: 20pt;" />
+    <input type="button" id="moneytransferBtn" value="Money Transfer"
+        onClick="window.location.href='moneytransfer.html'" style="font-size : 12pt; width: 100pt; height: 20pt;"
+        disabled />
+    <h5>
+        <div id="portNo" style="margin-right: 10pt;">Port Placeholder</div>
+    </h5>
 </body>
+
 </html>

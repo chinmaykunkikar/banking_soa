@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 
 <head>
 	<title>MyBank Account</title>
@@ -6,18 +7,14 @@
 	<script src="./scripts/_mybankAPIgateway.js"></script>
 </head>
 
-
 <h1 align=center>MYBANK ACCOUNTS</h1>
 
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
 	<form id="frm" name="frm">
 		<div align=center>
 			<hr>
-			ID: &nbsp;<input id="accountid" type="text" name="accountid"
-				ng-model="form.account._ID" />&nbsp;
-			
-			Name: &nbsp;<input id="accountname" type="text" name="accountname"
-			    ng-model="form.account.name" />&nbsp;
+			ID: &nbsp;<input id="accountid" type="text" name="accountid" ng-model="form.account._ID" />&nbsp;
+			Name: &nbsp;<input id="accountname" type="text" name="accountname" ng-model="form.account.name" />&nbsp;
 			<hr>
 			<br>
 			<button name="btnselect" ng-click="data.account.selectquery();">Read</button>
@@ -27,14 +24,12 @@
 			<button name="btndelete" ng-click="data.account.deletequery();">Delete</button>
 			&nbsp;&nbsp;
 			<button name="btninsert" ng-click="data.account.insertquery();">Create</button>
-
 		</div>
 		<br>
 		<hr>
 		<div align=center>
-			<br><b>Accounts List</b>
+			<br><b>ACCOUNTS LIST</b>
 			<br>
-
 			<table align="center">
 				<tr>
 					<td align="center">ID</td>
@@ -50,9 +45,7 @@
 					<td align="center">{{account._ID}}</td>
 					<td align="center">{{account.accountname}}</td>
 					<td align="center">{{account.accountbalance}}</td>
-
 				</tr>
-
 			</table>
 		</div>
 
@@ -96,7 +89,6 @@
 		</div>
 	</form>
 
-
 	<div id="debug" ng-show="showeventlog==1" align="center" style="background-color:darkgrey;color:white;">
 		<br>
 		<font color=black><b>DEBUG</b></font>
@@ -105,5 +97,6 @@
 		<br>querytype: {{data.querytype}}
 		<br>fired query status: {{msg}}
 	</div>
-
 </body>
+
+</html>
