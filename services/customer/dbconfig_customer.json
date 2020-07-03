@@ -4,5 +4,5 @@
 	"databasename": "dbCustomer",
 	"databaseusername": "chinmay",
 	"databasepassword": "8087",
-	"databasetestquery": "SELECT CONCAT(  '[',  GROUP_CONCAT(JSON_OBJECT('_id', _id)), ']') as jsonresult from tCustomer;"
+	"databasetestquery": "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('_id', _id)), ']') as jsonresult from tCustomer;"
 }

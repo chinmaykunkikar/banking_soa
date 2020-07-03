@@ -12,9 +12,9 @@ import java.net.URI;
  * Main class.
  *
  */
-public class mainEventService {
+public class mainAccount {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8085/mybank/";
+    public static final String BASE_URI = "http://localhost:8082/mybank/";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this

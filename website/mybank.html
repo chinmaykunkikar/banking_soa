@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title>MyBank</title>
+    <style>
+        body {
+            margin: 200pt;
+        }
+
+        h1 {
+            text-align: center;
+            color: firebrick
+        }
+
+        h6 {
+            text-align: right;
+            color: darkslategray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to MyBank</h1>
+    <hr>
+    <input type="button" id="customerBtn" value="Customer" onClick="window.location.href='customer.html'"
+        style="font-size : 14pt; width: 110pt; height: 25pt; margin-left: 170pt;" />
+    <input type="button" id="accountsBtn" value="Accounts" onClick="window.location.href='accounts.html'"
+        style="font-size : 14pt; width: 110pt; height: 25pt; margin-left: 10pt" />
+    <input type="button" id="moneytransferBtn" value="Money Transfer"
+        onClick="window.location.href='moneytransfer.html'"
+        style="font-size : 14pt; width: 110pt; height: 25pt;margin-left: 10pt" />
+    <h6>
+        <div id="portNo" style="margin-right: 10pt;">Port placeholder</div>
+    </h6>
+
+    <script src="./scripts/_mytoolkit.js"></script>
+</body>
+
+</html>

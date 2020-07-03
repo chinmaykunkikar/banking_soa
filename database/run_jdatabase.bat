@@ -1,13 +1,10 @@
-title Run Service Oriented Computing Architecture
+title jdatabase
+
+:: Change your project dirictory here
+set working_dir=E:\bank_soa
+
 @echo off
 cls
-
-choice /t 5 /n /d N /m "Compile jdatabase and jevent?"
-if %errorlevel% equ 1 goto yes
-if %errorlevel% equ 2 goto no
-
-:yes
-cd database
 echo - Compiling jdatabase package
 echo:
 javac -cp "json-simple-1.1.1.jar";"mysql-connector-java-8.0.18.jar"; jdatabase\*.java > run_jdatabase.log 2>&1
@@ -46,35 +43,4 @@ echo:
 java -cp "json-simple-1.1.1.jar";"mysql-connector-java-8.0.18.jar"; jdatabase.dbsql
 echo - Done
 echo:
-cd ..
-
-cd eventclient
-echo - Compiling jeventClient
-echo:
-call mvn clean compile > run_jevent.log 2>&1
-
-echo - Making jevent.jar
-cd .\target\classes
-jar cvf jevent.jar jevent\*.class >> run_jevent.log 2>&1
-cd ..\..
-copy .\target\classes\jevent.jar >> run_jevent.log 2>&1
-echo:
-echo - Installing jevent.jar
-echo:
-call mvn install:install-file -Dfile=%working_dir%\eventclient\jevent.jar -DgroupId=myevent -DartifactId=jevent -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true >> run_jevent.log 2>&1
-
-echo ---------------------------------
-echo - Testing jeventClient connection
-echo ---------------------------------
-call mvn exec:java
-echo:
-cd ..
-goto no
-
-:no
-cd services\customer
-start "customer service" cmd.exe /k "mvn clean compile exec:java"
-cd ..\account
-start "account service" cmd.exe /k "mvn clean compile exec:java"
-cd ..\eventsync
-start "eventsync service" cmd.exe /k "mvn clean compile exec:java"
+pause
