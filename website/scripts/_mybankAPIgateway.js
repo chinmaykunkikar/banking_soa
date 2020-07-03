@@ -33,6 +33,12 @@
 			"selectfields": "'_ID',_ID,'accountname',accountname,'accountbalance',accountbalance"
 		};
 
+		$scope.data.moneytransfer = {
+			"tablename": "tmoneytransfer",
+			"insertfields": "",
+			"selectfields": ""
+		}; // TODO
+
 		$scope.customer.executequery = function () {
 			$http({
 				method: 'POST',
@@ -57,7 +63,6 @@
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
 			});
-
 		};
 
 		$scope.account.executequery = function () {
@@ -84,8 +89,35 @@
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
 			});
-
 		};
+
+		$scope.moneytransfer.executequery = function() {
+			$http({
+				method: 'POST',
+				url: 'http://localhost:8083/mybank/moneytransfer/executequery/',
+				dataType: 'json',
+				data: {
+					query: $scope.data.query,
+					querytype: $scope.data.querytype
+				},
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8'
+				}
+			}).then(function successCallback(response) {
+				// this callback will be called asynchronously
+				// when the response is available
+				$scope.msg = "Post data submitted successfully!";
+				$scope.data.queryresponse = response.data;
+
+			}, function errorCallback(response) {
+				$scope.msg = "Service does not exist. " + response.data;
+				$scope.statusval = response.status;
+				$scope.statustext = response.statusText;
+				$scope.headers = response.headers();
+			});
+		};
+
+		// 'Customer' functions
 
 		$scope.data.customer.insertquery = function () {
 			var fieldvalues = "";
@@ -124,7 +156,7 @@
 			$scope.customer.executequery();
 		};
 
-
+		// 'Accounts' functions
 		$scope.data.account.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
@@ -162,6 +194,44 @@
 			$scope.account.executequery();
 		};
 
+		// 'MoneyTransfer' functions
+		$scope.data.moneytransfer.insertquery = function() {
+			var fieldvalues = "";
+			$scope.data.query = $scope.data.querytemplate.create;
+			$scope.data.querytype = 1;
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.insertfields);
+			fieldvalues = "";
+			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
+			$scope.moneytransfer.executequery();
+		}; //TODO
+
+		$scope.data.moneytransfer.deletequery = function() {
+			$scope.data.query = $scope.data.querytemplate.delete;
+			$scope.data.querytype = 1;
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
+			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.moneytransfer._ID);
+			$scope.moneytransfer.executequery();
+		}; //TODO
+		
+		$scope.data.moneytransfer.updatequery = function() {
+			$scope.data.query = $scope.data.querytemplate.update;
+			$scope.data.querytype = 1;
+			$scope.data.moneytransfer.updatefields = "";
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.updatefields);
+			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.moneytransfer._ID);
+			$scope.moneytransfer.executequery();
+		}; // TODO
+		
+		$scope.data.moneytransfer.selectquery = function() {
+			$scope.data.query = $scope.data.querytemplate.read;
+			$scope.data.querytype = 0;
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.selectfields);
+			$scope.moneytransfer.executequery();
+		}; // TODO
+
 		$scope.data.account.vieweventlog = function () {
 			$scope.showeventlog = 1;
 
@@ -181,7 +251,6 @@
 				// when the response is available
 				$scope.msg = "Post data submitted successfully!";
 				$scope.account.eventlog = response.data;
-				//alert(response.data);
 
 			}, function errorCallback(response) {
 				$scope.msg = "Service does not exist. " + response.data;
@@ -190,10 +259,10 @@
 				$scope.headers = response.headers();
 			});
 
-		} //account event log
+		}
 
 		$scope.hideeventlog = function () {
 			$scope.showeventlog = 0;
 		}
 
-	}); /*mainApp.dataController*/
+	});

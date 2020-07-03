@@ -13,17 +13,20 @@
     <form id="frm" name="frm">
         <div align=center>
             <hr>
-            ID: <input id="accountid" type="text" name="accountid" ng-model="form.account._ID" />&nbsp;
-            Name: <input id="accountname" type="text" name="accountname" ng-model="form.account.name" />&nbsp;
+            From Account ID: <input id="fromaccount" type="text" name="fromaccount"
+                ng-model="form.moneytransfer.fromaccount" />&nbsp;
+            To Account ID: <input id="toaccount" type="text" name="toaccount"
+                ng-model="form.moneytransfer.toaccount" />&nbsp;
+            Amount: <input id="amount" type="text" name="amount" ng-model="form.moneytransfer.amount" />
             <br>
             <br>
-            <button name="btnselect" ng-click="data.account.selectquery();">Read</button>
-            &nbsp;&nbsp;
-            <button name="btnupdate" ng-click="data.account.updatequery();">Update</button>
-            &nbsp;&nbsp;
-            <button name="btndelete" ng-click="data.account.deletequery();">Delete</button>
-            &nbsp;&nbsp;
-            <button name="btninsert" ng-click="data.account.insertquery();">Create</button>
+            <button name="btnselect" ng-click="data.moneytransfer.selectquery();">Read</button>
+            &nbsp;
+            <button name="btnupdate" ng-click="data.moneytransfer.updatequery();">Update</button>
+            &nbsp;
+            <button name="btndelete" ng-click="data.moneytransfer.deletequery();">Delete</button>
+            &nbsp;
+            <button name="btninsert" ng-click="data.moneytransfer.insertquery();">Create</button>
         </div>
         <br>
         <hr>
@@ -32,9 +35,9 @@
             <br>
             <table align="center">
                 <tr>
-                    <td align="center">ID</td>
-                    <td align="center">ACCOUNT NAME</td>
-                    <td align="center">BALANCE</td>
+                    <td align="center">FROM</td>
+                    <td align="center">TO</td>
+                    <td align="center">AMOUNT</td>
                 </tr>
                 <tr>
                     <td colspan=100%>
@@ -42,9 +45,9 @@
                     </td>
                 </tr>
                 <tr style="color:blue;" ng-repeat="account in data.queryresponse">
-                    <td align="center">{{account._ID}}</td>
-                    <td align="center">{{account.accountname}}</td>
-                    <td align="center">{{account.accountbalance}}</td>
+                    <td align="center">{{moneytransfer.fromaccount}}</td>
+                    <td align="center">{{moneytransfer.toaccount}}</td>
+                    <td align="center">{{moneytransfer.amount}}</td>
                 </tr>
             </table>
         </div>
