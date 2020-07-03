@@ -4,8 +4,10 @@
 
 		$scope.customer = {};
 		$scope.account = {};
+		$scope.moneytransfer = {};
 		$scope.account.eventlog = {};
 		$scope.showeventlog = 0; //by default hide the event log
+		$scope.showdebuglog = 0;
 
 		$scope.data = {
 			query: "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT(%fields%)), ']') as jsonresult from %TABLE_NAME%;",
@@ -54,11 +56,11 @@
 			}).then(function successCallback(response) {
 				// this callback will be called asynchronously
 				// when the response is available
-				$scope.msg = "Post data submitted successfully!";
+				$scope.msg = "Customer POST data submitted successfully!";
 				$scope.data.queryresponse = response.data;
 
 			}, function errorCallback(response) {
-				$scope.msg = "Service does not exist. " + response.data;
+				$scope.msg = "Service does not exist (Customer) " + response.data;
 				$scope.statusval = response.status;
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
@@ -80,11 +82,11 @@
 			}).then(function successCallback(response) {
 				// this callback will be called asynchronously
 				// when the response is available
-				$scope.msg = "Post data submitted successfully!";
+				$scope.msg = "Accounts POST data submitted successfully!";
 				$scope.data.queryresponse = response.data;
 
 			}, function errorCallback(response) {
-				$scope.msg = "Service does not exist. " + response.data;
+				$scope.msg = "Service does not exist (Accounts) " + response.data;
 				$scope.statusval = response.status;
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
@@ -106,11 +108,11 @@
 			}).then(function successCallback(response) {
 				// this callback will be called asynchronously
 				// when the response is available
-				$scope.msg = "Post data submitted successfully!";
+				$scope.msg = "MoneyTransfer POST data submitted successfully!";
 				$scope.data.queryresponse = response.data;
 
 			}, function errorCallback(response) {
-				$scope.msg = "Service does not exist. " + response.data;
+				$scope.msg = "Service does not exist (MoneyTransfer) " + response.data;
 				$scope.statusval = response.status;
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
@@ -118,7 +120,6 @@
 		};
 
 		// 'Customer' functions
-
 		$scope.data.customer.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
@@ -234,7 +235,6 @@
 
 		$scope.data.account.vieweventlog = function () {
 			$scope.showeventlog = 1;
-
 			$http({
 				method: 'POST',
 				url: 'http://localhost:8082/mybank/account/executequery/',
@@ -249,20 +249,23 @@
 			}).then(function successCallback(response) {
 				// this callback will be called asynchronously
 				// when the response is available
-				$scope.msg = "Post data submitted successfully!";
+				$scope.msg = "EventLog POST data submitted successfully!";
 				$scope.account.eventlog = response.data;
 
 			}, function errorCallback(response) {
-				$scope.msg = "Service does not exist. " + response.data;
+				$scope.msg = "Service does not exist (EventLog) " + response.data;
 				$scope.statusval = response.status;
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
 			});
-
 		}
 
 		$scope.hideeventlog = function () {
 			$scope.showeventlog = 0;
+		}
+
+		$scope.viewdebuglog = function () {
+			$scope.showdebuglog = 1;
 		}
 
 	});

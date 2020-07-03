@@ -132,7 +132,7 @@ public class dbsql {
 
 				for (int i = 0; i < querylist.length; i++) {
 					q = querylist[i]; // + ";"; //add the semi colon back for each query
-					System.out.print("\n\nExecuting query: " + q);
+					System.out.print("\nExecuting query: " + q);
 					preparedStmt = con.prepareStatement(q);
 					preparedStmt.execute();
 				}
@@ -154,7 +154,7 @@ public class dbsql {
 }
 
 /*
- * how to compile: F:\_JAMES\pers\accountingsoftware>javac -cp
+ * how to compile: E:\bank_soa\database>javac -cp
  * "mysql-connector-java-8.0.18.jar"; webservice\database\dbsql.java
  * E:\bank_soa\database>javac -cp
  * "json-simple-1.1.1.jar";"mysql-connector-java-8.0.18.jar"; jdatabase\*.java

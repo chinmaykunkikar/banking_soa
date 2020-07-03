@@ -50,7 +50,7 @@ public class svcEventSync {
 	public Response executequery(String data) {
 		String jsonresult = "";
 
-		System.out.println("svcEventSync executequery called");
+		//System.out.println("svcEventSync executequery called");
 
 		try {
 			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
@@ -123,11 +123,11 @@ public class svcEventSync {
 		String uri = "http://localhost:8082/mybank/account/syncevent";
 		eventclient.broadcastEvent(event, uri);
 
+		uri = "http://localhost:8081/mybank/customer/syncevent";
+		eventclient.broadcastEvent(event, uri);
+
 	   /*
  		* uri = "http://localhost:8083/mybank/moneytransfer/syncevent";
-		* eventclient.broadcastEvent(event, uri);
-        *
-		* uri = "http://localhost:8081/mybank/customer/syncevent";
 		* eventclient.broadcastEvent(event, uri);
 		* 
 		*/

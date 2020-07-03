@@ -7,6 +7,9 @@
 	"databasetestquery": "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('_id', _id)), ']') as jsonresult from tEvents;",
 	"services": [
 		{
+			"uri": "http://localhost:8081/mybank/customer/syncevent"
+		},
+		{
 			"uri": "http://localhost:8082/mybank/account/syncevent"
 		},
 		{

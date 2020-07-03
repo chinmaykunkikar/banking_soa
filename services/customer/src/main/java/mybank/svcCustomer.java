@@ -106,6 +106,10 @@ public class svcCustomer {
 	}
 
 	// sync the event locally as received from event synchronizer
+	@POST
+	@Path("/syncevent")
+	@Produces({ "application/json" })
+	@Consumes({ "application/json" })
 	public void syncEvent(String eventdata) {
 		// connect to event service
 		// sync event into local database

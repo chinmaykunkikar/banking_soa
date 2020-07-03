@@ -31,3 +31,6 @@ Thumbs.db
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+*.prefs
+others/testrestclient/mybankeventclient/.classpath
+others/testrestclient/mybankeventclient/.project

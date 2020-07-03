@@ -31,7 +31,6 @@ public class svcAccount {
 	final int WRITE_QUERY = 1;
 
 	public svcAccount() {
-
 		db = new dbsql(1); // create the database object
 		eventclient = new jeventClient("account");
 	}
@@ -41,11 +40,9 @@ public class svcAccount {
 	@Produces({ "application/json" })
 	@Consumes({ "application/json" })
 	public Response executequery(String data) {
-
 		String jsonresult = "";
 
 		try {
-
 			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
 
 			// parsing file "JSONExample.json"

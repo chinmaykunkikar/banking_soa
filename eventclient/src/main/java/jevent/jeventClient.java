@@ -90,19 +90,12 @@ public class jeventClient {
 		// json data needs the escape character to understand single quote contained
 		// within query
 		eventdata = eventdata.replace("'", "\\'");
-
-		query = "INSERT INTO tEvents " + " (eventdata, " + " eventdestination, " + " eventstatus, "
-				+ " eventdirection, " + " eventid, " + " eventsource) " + " VALUES (" + "'" + eventdata + "'" + ","
-				+ "'" + eventsource + "'" + "," + "0" + "," + "2" + "," + "-1" + "," + "'" + "unknown" + "'" + ");";
-
+		query = "INSERT INTO tEvents (eventdata, eventdestination, eventstatus,  eventdirection,  eventid,  eventsource)  VALUES ('"
+				+ eventdata + "','" + eventsource + "', 0, 2, -1,'unknown');";
 		System.out.println("Query to be fired: " + query);
-
 		jsonresult = db.executequery(query, querytype); // return json result from the query
-
 		System.out.println("jeventClient executequery result: " + jsonresult);
-
 		return jsonresult;
-
 	}
 
 	public Response broadcastEvent(String data, String uri) {

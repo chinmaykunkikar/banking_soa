@@ -47,6 +47,8 @@ public class mainAccount {
         System.out.println(String.format(
                 "Jersey app started with WADL available at " + "%sapplication.wadl\nHit enter to stop it...",
                 BASE_URI));
+        Runtime rt = Runtime.getRuntime();
+        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8082/mybank.html");
         System.in.read();
         server.shutdownNow();
     }
