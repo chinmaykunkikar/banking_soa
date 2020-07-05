@@ -36,9 +36,9 @@
 		};
 
 		$scope.data.moneytransfer = {
-			"tablename": "tmoneytransfer",
-			"insertfields": "",
-			"selectfields": ""
+			"tablename": "tMoneyTransfer",
+			"insertfields": "fromaccount, toaccount, amount",
+			"selectfields": "'_ID',_ID,'fromaccount',fromaccount,'toaccount',toaccount,'amount',amount"
 		}; // TODO
 
 		$scope.customer.executequery = function () {
@@ -202,7 +202,7 @@
 			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.insertfields);
-			fieldvalues = "";
+			fieldvalues = "'" + $scope.form.moneytransfer.fromaccount + "'" + ",'" + $scope.form.moneytransfer.toaccount + "','" + $scope.form.moneytransfer.amount + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.moneytransfer.executequery();
 		}; //TODO

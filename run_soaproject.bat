@@ -2,7 +2,7 @@ title Run Service Oriented Computing Architecture
 @echo off
 cls
 
-choice /t 5 /n /d N /m "Compile jdatabase and jevent?"
+choice /t 4 /n /d N /m "Compile jdatabase and jevent? (Y/N) (Default: N)"
 if %errorlevel% equ 1 goto yes
 if %errorlevel% equ 2 goto no
 
@@ -76,5 +76,7 @@ cd services\customer
 start "customer service" cmd.exe /k "mvn clean compile exec:java"
 cd ..\account
 start "account service" cmd.exe /k "mvn clean compile exec:java"
+cd ..\moneytransfer
+start "moenytransfer service" cmd.exe /k "mvn clean compile exec:java"
 cd ..\eventsync
 start "eventsync service" cmd.exe /k "mvn clean compile exec:java"

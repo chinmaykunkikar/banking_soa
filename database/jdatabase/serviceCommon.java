@@ -14,7 +14,7 @@ import java.io.FileWriter;
 public class serviceCommon {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Reading JSON");
-		System.out.println("Website folder:" + getJSONStringValuefromFile("dbconfig.json", "websitefolder"));
+		System.out.println("Website folder: " + getJSONStringValuefromFile("dbconfig.json", "websitefolder"));
 	}
 
 	public static String getJSONStringValuefromFile(String filename, String node) {
