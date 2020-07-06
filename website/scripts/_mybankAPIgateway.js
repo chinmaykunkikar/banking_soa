@@ -37,9 +37,9 @@
 
 		$scope.data.moneytransfer = {
 			"tablename": "tMoneyTransfer",
-			"insertfields": "fromaccount, toaccount, amount",
+			"insertfields": "fromaccount,toaccount,amount",
 			"selectfields": "'_ID',_ID,'fromaccount',fromaccount,'toaccount',toaccount,'amount',amount"
-		}; // TODO
+		};
 
 		$scope.customer.executequery = function () {
 			$http({
@@ -180,7 +180,7 @@
 		$scope.data.account.updatequery = function () {
 			$scope.data.query = $scope.data.querytemplate.update;
 			$scope.data.querytype = 1;
-			$scope.data.account.updatefields = " accountname = " + "'" + $scope.form.account.name + "'";
+			$scope.data.account.updatefields = "accountname = " + "'" + $scope.form.account.name + "'";
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.updatefields);
 			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.account._ID);
@@ -205,7 +205,7 @@
 			fieldvalues = "'" + $scope.form.moneytransfer.fromaccount + "'" + ",'" + $scope.form.moneytransfer.toaccount + "','" + $scope.form.moneytransfer.amount + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.moneytransfer.executequery();
-		}; //TODO
+		};
 
 		$scope.data.moneytransfer.deletequery = function() {
 			$scope.data.query = $scope.data.querytemplate.delete;
@@ -213,7 +213,7 @@
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.moneytransfer._ID);
 			$scope.moneytransfer.executequery();
-		}; //TODO
+		};
 		
 		$scope.data.moneytransfer.updatequery = function() {
 			$scope.data.query = $scope.data.querytemplate.update;
@@ -231,7 +231,7 @@
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.selectfields);
 			$scope.moneytransfer.executequery();
-		}; // TODO
+		};
 
 		$scope.data.account.vieweventlog = function () {
 			$scope.showeventlog = 1;

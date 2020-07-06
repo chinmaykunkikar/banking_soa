@@ -38,3 +38,6 @@ services/customer/.classpath
 services/customer/.project
 services/moneytransfer/.classpath
 services/moneytransfer/.project
+.vscode/settings.json
+database/jdatabase.jar
+eventclient/jevent.jar

@@ -13,6 +13,8 @@
     <form id="frm" name="frm">
         <div align=center>
             <hr>
+            ID: <input id="moneytransferid" type="text" name="moneytransferid"
+                ng-model="form.moneytransfer._ID" />&nbsp
             From Account ID: <input id="fromaccount" type="text" name="fromaccount"
                 ng-model="form.moneytransfer.fromaccount" />&nbsp;
             To Account ID: <input id="toaccount" type="text" name="toaccount"
@@ -44,7 +46,8 @@
                         <hr>
                     </td>
                 </tr>
-                <tr style="color:blue;" ng-repeat="account in data.queryresponse">
+                <tr style="color:blue;" ng-repeat="moneytransfer in data.queryresponse">
+                    <td align="center">{{moneytransfer._ID}}</td>
                     <td align="center">{{moneytransfer.fromaccount}}</td>
                     <td align="center">{{moneytransfer.toaccount}}</td>
                     <td align="center">{{moneytransfer.amount}}</td>

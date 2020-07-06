@@ -4,5 +4,5 @@
 	"databasename": "dbMoneyTransfer",
 	"databaseusername": "chinmay",
 	"databasepassword": "8087",
-	"databasetestquery": "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('_id', _id)), ']') as jsonresult from tMoneyTransfer;"
+	"databasetestquery": "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('_ID', _ID)), ']') as jsonresult from tMoneyTransfer;"
 }
