@@ -26,14 +26,12 @@ public class jeventClient {
 	private static Client client;
 
 	public jeventClient(String eventsrc) {
-		// initialize rest client to event sync
 		ClientConfig config = new ClientConfig();
 		client = ClientBuilder.newClient(config);
 		service = client.target(getBaseURI(eventsyncURI));
 		eventsource = eventsrc;
 	}
 
-	// can test the sql independently from command prompt too
 	public static void main(String args[]) {
 		System.out.println("Event client is initialized sync events at: " + eventsyncURI);
 	}
@@ -65,7 +63,7 @@ public class jeventClient {
 		} catch (Exception e) {
 			System.out.println("Returning sendevent failure -");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
-			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
+			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]");
 		}
 
 		return sendjsonresponse(output);
@@ -118,7 +116,7 @@ public class jeventClient {
 		} catch (Exception e) {
 			System.out.println("Returning broadcast event failure");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
-			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
+			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]");
 		}
 
 		return sendjsonresponse(output);
@@ -138,4 +136,4 @@ public class jeventClient {
 		}
 	}
 
-} // eventClient class end
+}

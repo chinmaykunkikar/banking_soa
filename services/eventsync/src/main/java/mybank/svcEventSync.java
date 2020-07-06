@@ -15,18 +15,13 @@ import javax.ws.rs.core.Response;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-//simple JSON
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
-//common bank database object
 import jdatabase.*;
 import jevent.*;
 
-/**
- * Root resource (exposed at "svcEventSync" path)
- */
 @Path("event")
 public class svcEventSync {
 
@@ -39,7 +34,7 @@ public class svcEventSync {
 
 	// dbsql 0:customer 1:accounts 2:money transfer 3:events
 	public svcEventSync() {
-		db = new dbsql(3); // create the database object
+		db = new dbsql(3);
 		eventclient = new jeventClient("eventsync");
 	}
 
@@ -50,29 +45,23 @@ public class svcEventSync {
 	public Response executequery(String data) {
 		String jsonresult = "";
 
-		//System.out.println("svcEventSync executequery called");
-
 		try {
 			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
-
-			// parsing file "JSONExample.json"
 			Object obj = new JSONParser().parse(data);
-
-			// typecasting obj to JSONObject
 			JSONObject jo = (JSONObject) obj;
 
 			// get the query and query type
 			String query = (String) jo.get("query");
 			int querytype = ((Long) jo.get("querytype")).intValue();
 
-			jsonresult = db.executequery(query, querytype); // return json result from the query
+			jsonresult = db.executequery(query, querytype);
 
 			System.out.println("svcEventSync executequery result: " + jsonresult);
 
 		} catch (Exception e) {
 			System.out.println("Returning Post2 failure -");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
-			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]"); // send the error as response
+			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]");
 		}
 
 		return sendjsonresponse(jsonresult);
@@ -87,17 +76,10 @@ public class svcEventSync {
 		}
 	}
 
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getIt() {
-		return "<h2>Welcome to MyBank Event Synchronizer service</h2>";
-	}
-
 	/*
 	 * The function will broadcast an incoming event or send it to a particular
 	 * destination
 	 */
-
 	@POST
 	@Path("/sync")
 	@Produces({ "application/json" })
@@ -105,8 +87,8 @@ public class svcEventSync {
 	public void syncEvent(String event) {
 		try {
 			// first save the query in local database
-			//eventclient.syncEvent(event, db); // save the event in dbEventSync
-			//broadcastEvent(event);
+			// eventclient.syncEvent(event, db); // save the event in dbEventSync
+			// broadcastEvent(event);
 		} catch (Exception e) {
 			throw new HTTPException(400);
 		}
@@ -119,7 +101,6 @@ public class svcEventSync {
 		// check source destination
 		// send to all destination except source
 
-		// for this example we will sync the event only with account service
 		String uri = "http://localhost:8082/mybank/account/syncevent";
 		eventclient.broadcastEvent(event, uri);
 
