@@ -59,6 +59,8 @@ public class svcAccount {
 
 			System.out.println("svcAccount executequery result: " + jsonresult);
 
+			eventclient.sendEvent(data);
+
 		} catch (Exception e) {
 			System.out.println("Returning Post2 failure");
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
