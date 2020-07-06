@@ -37,7 +37,7 @@ public class svcMoneyTransfer {
 		String jsonresult = "";
 
 		try {
-			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
+			data = data.replace("\n", "").replace("\\r", "").replace("\t", "");
 			Object obj = new JSONParser().parse(data);
 			JSONObject jo = (JSONObject) obj;
 

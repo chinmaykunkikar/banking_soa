@@ -1,11 +1,9 @@
 package mybank;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.core.MediaType;
 import javax.xml.ws.http.HTTPException;
 
 import javax.ws.rs.core.Response;
@@ -41,7 +39,7 @@ public class svcCustomer {
 
 		try {
 
-			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
+			data = data.replace("\n", "").replace("\\r", "").replace("\t", "");
 			Object obj = new JSONParser().parse(data);
 			JSONObject jo = (JSONObject) obj;
 

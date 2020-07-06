@@ -44,14 +44,13 @@ public class jeventClient {
 		System.out.println(output);
 
 		return resp;
-
 	}
 
 	public Response sendEvent(String data) {
 		String output = "";
 
 		try {
-			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
+			data = data.replace("\n", "").replace("\\r", "").replace("\t", "");
 			Object obj = new JSONParser().parse(data);
 			JSONObject inputJsonObj = (JSONObject) obj;
 
@@ -102,7 +101,7 @@ public class jeventClient {
 		try {
 			System.out.println("Broadcasting to service at: " + uri);
 
-			data = data.replace("\n", "").replace("\r", "").replace("\t", "");
+			data = data.replace("\n", "").replace("\\r", "").replace("\t", "");
 			Object obj = new JSONParser().parse(data);
 			JSONObject inputJsonObj = (JSONObject) obj;
 

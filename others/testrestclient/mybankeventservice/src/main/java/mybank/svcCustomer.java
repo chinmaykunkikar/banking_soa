@@ -52,7 +52,7 @@ public class svcCustomer {
 		try {
 
 			/*
-			 * data = data.replace("\n", "").replace("\r", "").replace("\t", "");
+			 * data = data.replace("\n", "").replace("\\r", "").replace("\t", "");
 			 * 
 			 * 
 			 * // parsing file "JSONExample.json" Object obj = new JSONParser().parse(data);
