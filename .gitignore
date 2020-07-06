@@ -34,3 +34,8 @@ $RECYCLE.BIN/
 *.prefs
 others/testrestclient/mybankeventclient/.classpath
 others/testrestclient/mybankeventclient/.project
+services/customer/.project
+services/customer/.classpath
+services/moneytransfer/.project
+services/moneytransfer/.classpath
+.vscode/settings.json
