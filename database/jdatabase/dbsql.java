@@ -2,22 +2,18 @@ package jdatabase;
 
 import java.sql.*;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
-
 public class dbsql {
-	final static int READ_QUERY = 0;
-	final static int WRITE_QUERY = 1;
+	static final int READ_QUERY = 0;
+	static final int WRITE_QUERY = 1;
 
-	static String databasename = "null";
-	static String databaseusername = "null";
-	static String databasepassword = "null";
-	static String databasetestquery = "null";
+	private static String databasename = "null";
+	private static String databaseusername = "null";
+	private static String databasepassword = "null";
+	private static String databasetestquery = "null";
 
-	static serviceCommon cmn = new serviceCommon();
+	private static serviceCommon cmn = new serviceCommon();
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		try {
 			String data;
 
@@ -32,11 +28,11 @@ public class dbsql {
 		}
 	}
 
-	public dbsql(int databaseID) {
+	public dbsql(final int databaseID) {
 		initializedatabase(databaseID);
 	}
 
-	public static void initializedatabase(int databaseID) {
+	public static void initializedatabase(final int databaseID) {
 
 		try {
 			String dbConfigFileName = "null";
@@ -52,10 +48,10 @@ public class dbsql {
 				dbConfigFileName = ".\\dbconfig_eventsync.json";
 			System.out.println("\nDatabase ID: " + databaseID + "; Config file: " + dbConfigFileName);
 
-			databasename = cmn.getJSONStringValuefromFile(dbConfigFileName, "databasename");
-			databaseusername = cmn.getJSONStringValuefromFile(dbConfigFileName, "databaseusername");
-			databasepassword = cmn.getJSONStringValuefromFile(dbConfigFileName, "databasepassword");
-			databasetestquery = cmn.getJSONStringValuefromFile(dbConfigFileName, "databasetestquery");
+			databasename = cmn.getJsonStringValue(dbConfigFileName, "databasename");
+			databaseusername = cmn.getJsonStringValue(dbConfigFileName, "databaseusername");
+			databasepassword = cmn.getJsonStringValue(dbConfigFileName, "databasepassword");
+			databasetestquery = cmn.getJsonStringValue(dbConfigFileName, "databasetestquery");
 
 			// System.out.println("Initializing db - name: " + databasename + "; user: " + databaseusername + "; password: "
 			// 		+ databasepassword);
@@ -66,7 +62,7 @@ public class dbsql {
 	}
 
 	// querytype = 0 means SELECT query, querytype 1 means data manipulation query
-	public static String executequery(String query, int querytype) {
+	public static String executequery(final String query, final int querytype) {
 
 		Statement stmt; // SELECT
 		PreparedStatement preparedStmt; // UPDATE, DELETE, INSERT

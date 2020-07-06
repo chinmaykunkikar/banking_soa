@@ -64,7 +64,6 @@ public class jeventClient {
 			System.out.println("[ {'error':'" + e.toString() + "'}]");
 			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]");
 		}
-
 		return sendjsonresponse(output);
 
 	}
@@ -134,5 +133,4 @@ public class jeventClient {
 			throw new HTTPException(400);
 		}
 	}
-
 }

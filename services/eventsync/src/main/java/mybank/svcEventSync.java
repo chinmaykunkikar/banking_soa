@@ -79,8 +79,8 @@ public class svcEventSync {
 	public void syncEvent(String event) {
 		try {
 			// first save the query in local database
-			// eventclient.syncEvent(event, db); // save the event in dbEventSync
-			// broadcastEvent(event);
+			eventclient.syncEvent(event, db); // save the event in dbEventSync
+			broadcastEvent(event);
 		} catch (Exception e) {
 			throw new HTTPException(400);
 		}
