@@ -25,8 +25,8 @@
 
 		$scope.data.customer = {
 			"tablename": "tCustomer",
-			"insertfields": "customername,customeraddress,customerphone,customertype",
-			"selectfields": "'_ID',_ID,'customername',customername,'customeraddress',customeraddress,'customerphone',customerphone,'customertype',customertype"
+			"insertfields": "customername,customeraddress,customerphone",
+			"selectfields": "'_ID',_ID,'customername',customername,'customeraddress',customeraddress,'customerphone',customerphone"
 		};
 
 		$scope.data.account = {
