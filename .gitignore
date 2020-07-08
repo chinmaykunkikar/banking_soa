@@ -41,3 +41,8 @@ services/moneytransfer/.project
 .vscode/settings.json
 database/jdatabase.jar
 eventclient/jevent.jar
+eventclient/.classpath
+eventclient/.project
+*.prefs
+services/account/.project
+services/account/.classpath
