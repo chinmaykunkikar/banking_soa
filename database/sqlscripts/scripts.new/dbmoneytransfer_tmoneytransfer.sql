@@ -30,15 +30,13 @@ CREATE TABLE `tmoneytransfer` (
   `toaccount` smallint unsigned NOT NULL,
   `amount` int DEFAULT '50000',
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `lastmodifieddate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `createdby` varchar(20) DEFAULT 'SYS',
-  `lastmodifiedby` varchar(20) DEFAULT 'SYS',
   PRIMARY KEY (`_id`),
   KEY `fk_taccount_from_idx` (`fromaccount`),
   KEY `fk_account_to_idx` (`toaccount`),
   CONSTRAINT `fk_account_to` FOREIGN KEY (`toaccount`) REFERENCES `taccount` (`_id`),
   CONSTRAINT `fk_taccount_from` FOREIGN KEY (`fromaccount`) REFERENCES `taccount` (`_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -74,14 +72,8 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `update_transaction` AFTER UPDATE ON `tmoneytransfer` FOR EACH ROW BEGIN
-    UPDATE dbmoneytransfer.taccount as A
-	SET A.accountbalance = A.accountbalance - NEW.amount
-	where A._id = NEW.fromaccount;
-	
-    UPDATE dbmoneytransfer.taccount as A
-	SET A.accountbalance = A.accountbalance + NEW.amount
-	where A._id = NEW.toaccount;
+/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `txn_update` BEFORE UPDATE ON `tmoneytransfer` FOR EACH ROW BEGIN
+signal sqlstate '45000' set message_text = 'UPDATE on transaction prevented';
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -98,4 +90,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-08  3:48:40
+-- Dump completed on 2020-07-09  1:34:28

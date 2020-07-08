@@ -47,6 +47,9 @@ public class svcMoneyTransfer {
 
 			jsonresult = db.executequery(query, querytype);
 
+			// workaround to avoid milliseconds from the query result
+			jsonresult = jsonresult.replace(".000000", "");
+
 			System.out.println("svcMoneyTransfer executequery result: " + jsonresult);
 
 			eventclient.sendEvent(data);

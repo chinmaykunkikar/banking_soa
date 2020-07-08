@@ -38,7 +38,7 @@
 		$scope.data.moneytransfer = {
 			"tablename": "tMoneyTransfer",
 			"insertfields": "fromaccount,toaccount,amount",
-			"selectfields": "'_ID',_ID,'fromaccount',fromaccount,'toaccount',toaccount,'amount',amount"
+			"selectfields": "'_ID',_ID,'createdate',createdate,'fromaccount',fromaccount,'toaccount',toaccount,'amount',amount"
 		};
 
 		$scope.customer.executequery = function () {
@@ -204,24 +204,6 @@
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.insertfields);
 			fieldvalues = "'" + $scope.form.moneytransfer.fromaccount + "','" + $scope.form.moneytransfer.toaccount + "','" + $scope.form.moneytransfer.amount + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
-			$scope.moneytransfer.executequery();
-		};
-
-		$scope.data.moneytransfer.deletequery = function() {
-			$scope.data.query = $scope.data.querytemplate.delete;
-			$scope.data.querytype = 1;
-			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
-			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.moneytransfer._ID);
-			$scope.moneytransfer.executequery();
-		};
-		
-		$scope.data.moneytransfer.updatequery = function() {
-			$scope.data.query = $scope.data.querytemplate.update;
-			$scope.data.querytype = 1;
-			$scope.data.moneytransfer.updatefields = "fromaccount='" + $scope.form.moneytransfer.fromaccount + "',toaccount='" + $scope.form.moneytransfer.toaccount + "',amount='" + $scope.form.moneytransfer.amount + "'";
-			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
-			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.updatefields);
-			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.moneytransfer._ID);
 			$scope.moneytransfer.executequery();
 		};
 		
