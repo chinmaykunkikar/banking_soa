@@ -5,9 +5,11 @@
 		$scope.customer = {};
 		$scope.account = {};
 		$scope.moneytransfer = {};
+		$scope.reset = {};
 		$scope.account.eventlog = {};
 		$scope.showeventlog = 0; //by default hide the event log
 		$scope.showdebuglog = 0;
+		$scope.showmoneytable = 0;
 
 		$scope.data = {
 			query: "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT(%fields%)), ']') as jsonresult from %TABLE_NAME%;",
@@ -196,6 +198,15 @@
 		};
 
 		// 'MoneyTransfer' functions
+		$scope.data.moneytransfer.selectquery = function() {
+			$scope.data.query = $scope.data.querytemplate.read;
+			$scope.data.querytype = 0;
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.selectfields);
+			$scope.moneytransfer.executequery();
+			$scope.showmoneytable = 1;
+		};
+		
 		$scope.data.moneytransfer.insertquery = function() {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
@@ -205,14 +216,8 @@
 			fieldvalues = "'" + $scope.form.moneytransfer.fromaccount + "','" + $scope.form.moneytransfer.toaccount + "','" + $scope.form.moneytransfer.amount + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.moneytransfer.executequery();
-		};
-		
-		$scope.data.moneytransfer.selectquery = function() {
-			$scope.data.query = $scope.data.querytemplate.read;
-			$scope.data.querytype = 0;
-			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
-			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.selectfields);
-			$scope.moneytransfer.executequery();
+			$scope.data.moneytransfer.selectquery();
+			$scope.form.moneytransfer = angular.copy($scope.reset);
 		};
 
 		$scope.data.account.vieweventlog = function () {
