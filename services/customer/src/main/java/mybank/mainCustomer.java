@@ -27,7 +27,7 @@ public class mainCustomer {
 
         // Open the URI in Chrome (Windows)
         Runtime rt = Runtime.getRuntime();
-        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8081/mybank.html");
+        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8081/customer.html");
 
         System.in.read();
         server.shutdownNow();

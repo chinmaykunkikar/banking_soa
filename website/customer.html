@@ -7,80 +7,93 @@
 	<title>MyBank Customer</title>
 	<script src="./scripts/angular.1.7.8.js"></script>
 	<script src="./scripts/_mybankAPIgateway.js"></script>
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+	<link rel="stylesheet" href="css/mdb.min.css" />
 </head>
 
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
 	<div class="container-sm">
-		<nav class="navbar navbar-expand-sm navbar-light">
+		<nav class="navbar navbar-expand-sm navbar-light shadow-0">
 			<a class="navbar-brand text-danger" href="./mybank.html">MyBank</a>
 			<div class="collapse navbar-collapse" id="navbarCollapseID">
 				<div class="navbar-nav">
 					<a class="nav-item nav-link text-primary active" href="#">Customer</a>
-					<a class="nav-item nav-link" href="#">Accounts</a>
-					<a class="nav-item nav-link" href="#">Money Transfer</a>
+					<a class="nav-item nav-link text-secondary" href="#">Accounts</a>
+					<a class="nav-item nav-link text-warning" href="#">Money Transfer</a>
 				</div>
 			</div>
 		</nav>
-		<div class="display-4 text-center mt-5 text-primary">Customer</div>
-		<hr class="mt-4 mb-4"/>
-		<form id="frm" name="frm" class="form-group">
+		<div class="display-5 text-center mt-2 text-primary">Customer</div>
+		<hr class="mt-4 mb-4" />
+		<form id="frm" name="frm">
 			<div class="text-center">
-				<div class="form-row">
+				<div class="row">
 					<div class="col">
-						<input class="form-control form-control-sm" id="customerid" type="text" name="customerid"
-							ng-model="form.customer._ID" placeholder="Customer ID" />
+						<div class="form-outline">
+							<input class="form-control" id="customerid" type="text" name="customerid"
+								ng-model="form.customer._ID" />
+							<label class="form-label" for="customerid">Customer ID</label>
+						</div>
 					</div>
 					<div class="col">
-						<input class="form-control form-control-sm" id="customername" type="text" name="customername"
-							ng-model="form.customer.name" placeholder="Name" />
+						<div class="form-outline">
+							<input class="form-control" id="customername" type="text" name="customername"
+								ng-model="form.customer.name" />
+							<label class="form-label" for="customername">Name</label>
+						</div>
 					</div>
 					<div class="col">
-						<input class="form-control form-control-sm" id="customeraddress" type="text"
-							name="customeraddress" ng-model="form.customer.address" placeholder="Address" />
+						<div class="form-outline">
+							<input class="form-control" id="customeraddress" type="text" name="customeraddress"
+								ng-model="form.customer.address" />
+							<label class="form-label" for="customeraddress">Address</label>
+						</div>
 					</div>
 					<div class="col">
-						<input class="form-control form-control-sm" id="customerphone" type="text" name="customerphone"
-							ng-model="form.customer.phone" placeholder="Phone #" />
+						<div class="form-outline">
+							<input class="form-control" id="customerphone" type="text" name="customerphone"
+								ng-model="form.customer.phone" />
+							<label class="form-label" for="customerphone">Phone #</label>
+						</div>
 					</div>
 				</div>
 				<br>
 				<div class="btn-group" role="submit" aria-label="Submit Buttons">
-					<button class="btn btn-dark" name="btnselect"
+					<button class="btn btn-lg btn-primary" name="btnselect"
 						ng-click="data.customer.selectquery();">Read</button>
-					<button class="btn btn-dark" name="btnupdate"
+					<button class="btn btn-lg btn-primary" name="btnupdate"
 						ng-click="data.customer.updatequery();">Update</button>
-					<button class="btn btn-dark" name="btndelete"
+					<button class="btn btn-lg btn-primary" name="btndelete"
 						ng-click="data.customer.deletequery();">Delete</button>
-					<button class="btn btn-dark" name="btninsert"
-						ng-click="data.customer.insertquery();">Create</button>
+					<button class="btn btn-lg btn-primary" name="btninsert"
+						ng-click="data.customer.insertquery();data.customer.selectquery();">Create</button>
 				</div>
 			</div>
 		</form>
 		<br>
-		<div class="text-center">
-			<table class="table table-fixed" ng-show="showcustomertable==1">
-				<caption>List of Customers</caption>
-				<thead class="thead-light">
+		<div class="card text-center shadow-2-strong" ng-if="data.queryresponse.length > 0">
+			<div class="card-header text-right bg-primary text-white">
+				List of Customers
+			</div>
+			<div class="card-body">
+				<table class="table table-sm">
 					<tr>
 						<th scope="col" class="text-center">Customer ID</td>
 						<th scope="col" class="text-center">Name</td>
 						<th scope="col" class="text-center">Address</td>
 						<th scope="col" class="text-center">Phone #</td>
 					</tr>
-				</thead>
-				<tbody>
 					<tr ng-repeat="customer in data.queryresponse">
 						<th scope="col" class="text-center">{{customer._ID}}</td>
 						<td class="text-center">{{customer.customername}}</td>
 						<td class="text-center">{{customer.customeraddress}}</td>
 						<td class="text-center">{{customer.customerphone}}</td>
 					</tr>
-				</tbody>
-			</table>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="js/mdb.min.js"></script>
+
+</html>

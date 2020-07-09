@@ -7,56 +7,65 @@
     <title>MyBank MoneyTransfer</title>
     <script src="./scripts/angular.1.7.8.js"></script>
     <script src="./scripts/_mybankAPIgateway.js"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <link rel="stylesheet" href="css/mdb.min.css" />
 </head>
 
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
     <div class="container-sm">
-        <nav class="navbar navbar-expand-sm navbar-light">
+        <nav class="navbar navbar-expand-sm navbar-light shadow-0">
             <a class="navbar-brand text-danger" href="./mybank.html">MyBank</a>
             <div class="collapse navbar-collapse" id="navbarCollapseID">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#">Customer</a>
-                    <a class="nav-item nav-link" href="#">Accounts</a>
+                    <a class="nav-item nav-link test-primary" href="#">Customer</a>
+                    <a class="nav-item nav-link text-secondary" href="#">Accounts</a>
                     <a class="nav-item nav-link text-warning active" href="#">Money Transfer</a>
                 </div>
             </div>
         </nav>
-        <div class="display-4 text-center mt-5 text-warning">Money Transfer</div>
-		<hr class="mt-4 mb-4"/>
-        <form id="frm" name="frm" class="form-group">
+        <div class="display-5 text-center mt-2 text-warning">Money Transfer</div>
+        <hr class="mt-4 mb-4" />
+        <form id="frm" name="frm">
             <div class="text-center">
-                <div class="form-row">
+                <div class="row">
                     <div class="col">
-                        <input class="form-control form-control-sm" id="fromaccount" type="text" name="fromaccount"
-                            ng-model="form.moneytransfer.fromaccount" placeholder="Sender ID" />
+                        <div class="form-outline">
+                            <input class="form-control" id="fromaccount" type="text" name="fromaccount"
+                                ng-model="form.moneytransfer.fromaccount" />
+                            <label class="form-label" for="fromaccount">Sender ID</label>
+                        </div>
                     </div>
                     <div class="col">
-                        <input class="form-control form-control-sm" id="toaccount" type="text" name="toaccount"
-                            ng-model="form.moneytransfer.toaccount" placeholder="Receiver ID" />
+                        <div class="form-outline">
+                            <input class="form-control" id="toaccount" type="text" name="toaccount"
+                                ng-model="form.moneytransfer.toaccount" />
+                            <label class="form-label" for="toaccount">Receiver ID</label>
+                        </div>
                     </div>
                     <div class="col">
-                        <input class="form-control form-control-sm" id="amount" type="text" name="amount"
-                            ng-model="form.moneytransfer.amount" placeholder="Amount" />
+                        <div class="form-outline">
+                            <input class="form-control" id="amount" type="text" name="amount"
+                                ng-model="form.moneytransfer.amount" />
+                            <label class="form-label" for="amount">Amount</label>
+                        </div>
                     </div>
                 </div>
                 <br>
                 <div class="btn-group" role="submit" aria-label="Submit Buttons">
-                    <button name="btnselect" type="button" class="btn btn-dark"
+                    <button class="btn btn-lg btn-warning" name="btnselect" type="button"
                         ng-click="data.moneytransfer.selectquery();">Read</button>
-                    <button name="btninsert" type="button" class="btn btn-dark"
-                        ng-click="data.moneytransfer.insertquery();">Create</button>
+                    <button class="btn btn-lg btn-warning" name="btninsert" type="button"
+                        ng-click="data.moneytransfer.insertquery();data.moneytransfer.selectquery();">Create</button>
                 </div>
             </div>
         </form>
         <br>
-        <div class="text-center">
-            <table class="table table-fixed" ng-show="showmoneytable==1">
-                <caption>List of Transactions</caption>
-                <thead class="thead-light">
+        <div class="card text-center shadow-2-strong" ng-if="data.queryresponse.length > 0">
+            <div class="card-header text-right bg-warning text-white">
+                List of Transactions
+            </div>
+            <div class="card-body">
+                <table class="table table-sm">
                     <tr>
                         <th scope="col" class="text-center">Txn #</th>
                         <th scope="col" class="text-center">Txn Date</th>
@@ -64,8 +73,6 @@
                         <th scope="col" class="text-center">Receiver</th>
                         <th scope="col" class="text-center">Amount</th>
                     </tr>
-                </thead>
-                <tbody>
                     <tr ng-repeat="moneytransfer in data.queryresponse">
                         <th class="text-center" scope="col">{{moneytransfer._ID}}</td>
                         <td class="text-center">{{moneytransfer.createdate}}</td>
@@ -73,10 +80,11 @@
                         <td class="text-center">{{moneytransfer.toaccount}}</td>
                         <td class="text-center">{{moneytransfer.amount}}</td>
                     </tr>
-                </tbody>
-            </table>
+                </table>
+            </div>
         </div>
     </div>
 </body>
+<script type="text/javascript" src="js/mdb.min.js"></script>
 
 </html>

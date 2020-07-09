@@ -26,7 +26,7 @@ public class mainMoneyTransfer {
 
         // Open the URI in Chrome (Windows)
         Runtime rt = Runtime.getRuntime();
-        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8083/mybank.html");
+        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8083/moneytransfer.html");
 
         System.in.read();
         server.shutdownNow();
