@@ -8,7 +8,7 @@ import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import java.io.IOException;
 import java.net.URI;
 
-public class mainMoneyTransfer {
+public class mainTransactions {
     public static final String BASE_URI = "http://localhost:8083/mybank/";
     public static HttpServer startServer() {
         final ResourceConfig rc = new ResourceConfig().packages("mybank");
@@ -26,7 +26,7 @@ public class mainMoneyTransfer {
 
         // Open the URI in Chrome (Windows)
         Runtime rt = Runtime.getRuntime();
-        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8083/moneytransfer.html");
+        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8083/transactions.html");
 
         System.in.read();
         server.shutdownNow();

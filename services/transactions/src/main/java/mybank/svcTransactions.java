@@ -14,8 +14,8 @@ import org.json.simple.parser.*;
 import jdatabase.*;
 import jevent.*;
 
-@Path("moneytransfer")
-public class svcMoneyTransfer {
+@Path("transactions")
+public class svcTransactions {
 
 	public String data;
 	public dbsql db;
@@ -24,9 +24,9 @@ public class svcMoneyTransfer {
 	final int READ_QUERY = 0;
 	final int WRITE_QUERY = 1;
 
-	public svcMoneyTransfer() {
+	public svcTransactions() {
 		db = new dbsql(2);
-		eventclient = new jeventClient("moneytransfer");
+		eventclient = new jeventClient("transactions");
 	}
 
 	@POST
@@ -50,7 +50,7 @@ public class svcMoneyTransfer {
 			// workaround to avoid milliseconds from the query result
 			jsonresult = jsonresult.replace(".000000", "");
 
-			System.out.println("svcMoneyTransfer executequery result: " + jsonresult);
+			System.out.println("svcTransactions executequery result: " + jsonresult);
 
 			eventclient.sendEvent(data);
 

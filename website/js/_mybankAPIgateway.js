@@ -4,7 +4,7 @@
 
 		$scope.customer = {};
 		$scope.account = {};
-		$scope.moneytransfer = {};
+		$scope.transactions = {};
 		$scope.reset = {};
 
 		$scope.data = {
@@ -16,27 +16,27 @@
 
 		$scope.data.querytemplate = {
 			"create": "INSERT INTO %TABLE_NAME% (%fields%) VALUES (%values%);",
-			"delete": "DELETE FROM %TABLE_NAME% WHERE _ID in (%ID_LIST%);",
+			"delete": "DELETE FROM %TABLE_NAME% WHERE _id in (%ID_LIST%);",
 			"update": "UPDATE %TABLE_NAME% SET %fields% WHERE _id = %_ID%;",
 			"read": "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT(%fields%)), ']') as jsonresult from %TABLE_NAME%;"
 		};
 
 		$scope.data.customer = {
-			"tablename": "tCustomer",
+			"tablename": "tcustomer",
 			"insertfields": "customername,customeraddress,customerphone",
-			"selectfields": "'_ID',_ID,'customername',customername,'customeraddress',customeraddress,'customerphone',customerphone"
+			"selectfields": "'_id',_id,'customername',customername,'customeraddress',customeraddress,'customerphone',customerphone"
 		};
 
 		$scope.data.account = {
-			"tablename": "tAccount",
+			"tablename": "taccount",
 			"insertfields": "accountname,accountbalance",
-			"selectfields": "'_ID',_ID,'accountname',accountname,'accountbalance',accountbalance"
+			"selectfields": "'_id',_id,'accountname',accountname,'accountbalance',accountbalance"
 		};
 
-		$scope.data.moneytransfer = {
-			"tablename": "tMoneyTransfer",
-			"insertfields": "fromaccount,toaccount,amount",
-			"selectfields": "'_ID',_ID,'createdate',createdate,'fromaccount',fromaccount,'toaccount',toaccount,'amount',amount"
+		$scope.data.transactions = {
+			"tablename": "ttransactions",
+			"insertfields": "idsender,idreceiver,transferamount",
+			"selectfields": "'_id',_id,'createdate',createdate,'idsender',idsender,'idreceiver',idreceiver,'transferamount',transferamount"
 		};
 
 		$scope.customer.executequery = function () {
@@ -91,10 +91,10 @@
 			});
 		};
 
-		$scope.moneytransfer.executequery = function () {
+		$scope.transactions.executequery = function () {
 			$http({
 				method: 'POST',
-				url: 'http://localhost:8083/mybank/moneytransfer/executequery/',
+				url: 'http://localhost:8083/mybank/transactions/executequery/',
 				dataType: 'json',
 				data: {
 					query: $scope.data.query,
@@ -106,11 +106,11 @@
 			}).then(function successCallback(response) {
 				// this callback will be called asynchronously
 				// when the response is available
-				$scope.msg = "MoneyTransfer POST data submitted successfully!";
+				$scope.msg = "Transactions POST data submitted successfully!";
 				$scope.data.queryresponse = response.data;
 
 			}, function errorCallback(response) {
-				$scope.msg = "Service does not exist (MoneyTransfer) " + response.data;
+				$scope.msg = "Service does not exist (Transactions) " + response.data;
 				$scope.statusval = response.status;
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
@@ -143,7 +143,7 @@
 			$scope.data.query = $scope.data.querytemplate.delete;
 			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
-			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.customer._ID);
+			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.customer._id);
 			$scope.customer.executequery();
 			$scope.form.customer = angular.copy($scope.reset);
 		};
@@ -154,7 +154,7 @@
 			$scope.data.customer.updatefields = "customername='" + $scope.form.customer.name + "'";
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.updatefields);
-			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.customer._ID);
+			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.customer._id);
 			$scope.customer.executequery();
 			$scope.form.customer = angular.copy($scope.reset);
 		};
@@ -184,7 +184,7 @@
 			$scope.data.query = $scope.data.querytemplate.delete;
 			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
-			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.account._ID);
+			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.account._id);
 			$scope.account.executequery();
 			$scope.form.account = angular.copy($scope.reset);
 		};
@@ -195,31 +195,30 @@
 			$scope.data.account.updatefields = "accountname='" + $scope.form.account.name + "',accountbalance='" + $scope.form.account.balance + "'";
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.updatefields);
-			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.account._ID);
+			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.account._id);
 			$scope.account.executequery();
 			$scope.form.account = angular.copy($scope.reset);
 		};
 
-		// 'MoneyTransfer' functions
-		$scope.data.moneytransfer.selectquery = function () {
+		// 'Transactions' functions
+		$scope.data.transactions.selectquery = function () {
 			$scope.data.query = $scope.data.querytemplate.read;
 			$scope.data.querytype = 0;
-			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
-			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.selectfields);
-			$scope.moneytransfer.executequery();
-			$scope.showmoneytable = 1;
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.transactions.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.transactions.selectfields);
+			$scope.transactions.executequery();
 		};
 
-		$scope.data.moneytransfer.insertquery = function () {
+		$scope.data.transactions.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
 			$scope.data.querytype = 1;
-			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
-			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.moneytransfer.insertfields);
-			fieldvalues = "'" + $scope.form.moneytransfer.fromaccount + "','" + $scope.form.moneytransfer.toaccount + "','" + $scope.form.moneytransfer.amount + "'";
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.transactions.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.transactions.insertfields);
+			fieldvalues = "'" + $scope.form.transactions.idsender + "','" + $scope.form.transactions.idreceiver + "','" + $scope.form.transactions.transferamount + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
-			$scope.moneytransfer.executequery();
-			$scope.form.moneytransfer = angular.copy($scope.reset);
+			$scope.transactions.executequery();
+			$scope.form.transactions = angular.copy($scope.reset);
 		};
 
 		// redundant function for now

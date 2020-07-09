@@ -19,7 +19,7 @@
 				<div class="navbar-nav">
 					<a class="nav-link text-primary" href="http://localhost:8081/customer.html">Customer</a>
 					<a class="nav-link text-secondary active" href="#">Accounts</a>
-					<a class="nav-link text-warning" href="http://localhost:8083/moneytransfer.html">Money Transfer</a>
+					<a class="nav-link text-warning" href="http://localhost:8083/transactions.html">Transactions</a>
 				</div>
 			</div>
 		</nav>
@@ -31,7 +31,7 @@
 					<div class="col">
 						<div class="form-outline">
 							<input class="form-control" id="accountid" type="text" name="accountid"
-								ng-model="form.account._ID" />
+								ng-model="form.account._id" />
 							<label class="form-label" for="accountid">Customer ID</label>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 						<th scope="col" class="text-center">Balance</td>
 					</tr>
 					<tr ng-repeat="account in data.queryresponse">
-						<th scope="col" class="text-center">{{account._ID}}</td>
+						<th scope="col" class="text-center">{{account._id}}</td>
 						<td class="text-center">{{account.accountname}}</td>
 						<td class="text-center">{{account.accountbalance}}</td>
 					</tr>

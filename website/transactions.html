@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MyBank MoneyTransfer</title>
+    <title>MyBank Transactions</title>
     <script src="./js/angular.min.js"></script>
     <script src="./js/_mybankAPIgateway.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
@@ -19,43 +19,43 @@
                 <div class="navbar-nav">
                     <a class="nav-link text-primary" href="http://localhost:8081/customer.html">Customer</a>
                     <a class="nav-link text-secondary" href="http://localhost:8082/accounts.html">Accounts</a>
-                    <a class="nav-link text-warning active" href="#">Money Transfer</a>
+                    <a class="nav-link text-warning active" href="#">Transactions</a>
                 </div>
             </div>
         </nav>
-        <div class="display-5 text-center mt-2 text-warning">Money Transfer</div>
+        <div class="display-5 text-center mt-2 text-warning">Transactions</div>
         <hr class="mt-4 mb-4" />
         <form id="frm" name="frm">
             <div class="text-center">
                 <div class="row">
                     <div class="col">
                         <div class="form-outline">
-                            <input class="form-control" id="fromaccount" type="text" name="fromaccount"
-                                ng-model="form.moneytransfer.fromaccount" />
-                            <label class="form-label" for="fromaccount">Sender ID</label>
+                            <input class="form-control" id="idsender" type="text" name="idsender"
+                                ng-model="form.transactions.idsender" />
+                            <label class="form-label" for="idsender">Sender ID</label>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-outline">
-                            <input class="form-control" id="toaccount" type="text" name="toaccount"
-                                ng-model="form.moneytransfer.toaccount" />
-                            <label class="form-label" for="toaccount">Receiver ID</label>
+                            <input class="form-control" id="idreceiver" type="text" name="idreceiver"
+                                ng-model="form.transactions.idreceiver" />
+                            <label class="form-label" for="idreceiver">Receiver ID</label>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-outline">
-                            <input class="form-control" id="amount" type="text" name="amount"
-                                ng-model="form.moneytransfer.amount" />
-                            <label class="form-label" for="amount">Amount</label>
+                            <input class="form-control" id="transferamount" type="text" name="transferamount"
+                                ng-model="form.transactions.transferamount" />
+                            <label class="form-label" for="transferamount">Amount</label>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="btn-group" role="submit" aria-label="Submit Buttons">
                     <button class="btn btn-lg btn-warning" name="btnselect" type="button"
-                        ng-click="data.moneytransfer.selectquery();">Read</button>
+                        ng-click="data.transactions.selectquery();">Read</button>
                     <button class="btn btn-lg btn-warning" name="btninsert" type="button"
-                        ng-click="data.moneytransfer.insertquery();data.moneytransfer.selectquery();">Create</button>
+                        ng-click="data.transactions.insertquery();">Create</button>
                 </div>
             </div>
         </form>
@@ -73,12 +73,12 @@
                         <th scope="col" class="text-center">Receiver</th>
                         <th scope="col" class="text-center">Amount</th>
                     </tr>
-                    <tr ng-repeat="moneytransfer in data.queryresponse">
-                        <th class="text-center" scope="col">{{moneytransfer._ID}}</td>
-                        <td class="text-center">{{moneytransfer.createdate}}</td>
-                        <td class="text-center">{{moneytransfer.fromaccount}}</td>
-                        <td class="text-center">{{moneytransfer.toaccount}}</td>
-                        <td class="text-center">{{moneytransfer.amount}}</td>
+                    <tr ng-repeat="transactions in data.queryresponse">
+                        <th class="text-center" scope="col">{{transactions._id}}</td>
+                        <td class="text-center">{{transactions.createdate}}</td>
+                        <td class="text-center">{{transactions.idsender}}</td>
+                        <td class="text-center">{{transactions.idreceiver}}</td>
+                        <td class="text-center">{{transactions.transferamount}}</td>
                     </tr>
                 </table>
             </div>

@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS dbEventSync;
 CREATE DATABASE IF NOT EXISTS dbEventSync;
-USE dbEventSync;
+USE dbeventsync;
 SET GLOBAL group_concat_max_len = 1000000;
 /* event table */
 /* microservices have a common event receiving tables */

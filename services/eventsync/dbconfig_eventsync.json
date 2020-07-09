@@ -1,7 +1,7 @@
 {
 	"softwarefolder": "E:\\bank_soa\\",
 	"websitefolder": "E:\\bank_soa\\website\\",
-	"databasename": "dbEventSync",
+	"databasename": "dbeventsync",
 	"databaseusername": "chinmay",
 	"databasepassword": "8087",
 	"databasetestquery": "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('_id', _id)), ']') as jsonresult from tEvents;",
@@ -13,7 +13,7 @@
 			"uri": "http://localhost:8082/mybank/account/syncevent"
 		},
 		{
-			"uri": "http://localhost:8083/mybank/moneytransfer/syncevent"
+			"uri": "http://localhost:8083/mybank/transactions/syncevent"
 		}
 	]
 }

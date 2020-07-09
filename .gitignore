@@ -36,8 +36,8 @@ others/testrestclient/mybankeventclient/.classpath
 others/testrestclient/mybankeventclient/.project
 services/customer/.classpath
 services/customer/.project
-services/moneytransfer/.classpath
-services/moneytransfer/.project
+services/transactions/.classpath
+services/transactions/.project
 .vscode/settings.json
 database/jdatabase.jar
 eventclient/jevent.jar

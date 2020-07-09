@@ -37,13 +37,13 @@ public class dbsql {
 		try {
 			String dbConfigFileName = "null";
 
-			// databaseID = 0: dbCustomer, 1: dbAccount , 2: dbMoneyTransfer, 3: dbEventSync
+			// databaseID = 0: dbCustomer, 1: dbAccount , 2: dbTransactions, 3: dbEventSync
 			if (databaseID == 0)
 				dbConfigFileName = ".\\dbconfig_customer.json";
 			else if (databaseID == 1)
 				dbConfigFileName = ".\\dbconfig_account.json";
 			else if (databaseID == 2)
-				dbConfigFileName = ".\\dbconfig_moneytransfer.json";
+				dbConfigFileName = ".\\dbconfig_transactions.json";
 			else if (databaseID == 3)
 				dbConfigFileName = ".\\dbconfig_eventsync.json";
 			System.out.println("\nDatabase ID: " + databaseID + "; Config file: " + dbConfigFileName);

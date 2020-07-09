@@ -24,7 +24,7 @@ public class svcEventSync {
 	final int READ_QUERY = 0;
 	final int WRITE_QUERY = 1;
 
-	// dbsql 0:customer 1:accounts 2:money transfer 3:events
+	// dbsql 0:customer 1:accounts 2:transactions 3:events
 	public svcEventSync() {
 		db = new dbsql(3);
 		eventclient = new jeventClient("eventsync");
@@ -79,7 +79,7 @@ public class svcEventSync {
 	public void syncEvent(String event) {
 		try {
 			// first save the query in local database
-			eventclient.syncEvent(event, db); // save the event in dbEventSync
+			eventclient.syncEvent(event, db); // save the event in dbeventsync
 			broadcastEvent(event);
 		} catch (Exception e) {
 			throw new HTTPException(400);
@@ -99,7 +99,7 @@ public class svcEventSync {
 		uri = "http://localhost:8081/mybank/customer/syncevent";
 		eventclient.broadcastEvent(event, uri);
 
- 		uri = "http://localhost:8083/mybank/moneytransfer/syncevent";
+ 		uri = "http://localhost:8083/mybank/transactions/syncevent";
 		eventclient.broadcastEvent(event, uri);
 	}
 }

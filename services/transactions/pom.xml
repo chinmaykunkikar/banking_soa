@@ -7,7 +7,7 @@
     <artifactId>jersey-service</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>mybankMoneyTransferRestService</name>
+    <name>mybankTransactionsRestService</name>
 
     <dependencyManagement>
         <dependencies>
@@ -93,7 +93,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>mybank.mainMoneyTransfer</mainClass>
+                    <mainClass>mybank.mainTransactions</mainClass>
                 </configuration>
             </plugin>
         </plugins>
