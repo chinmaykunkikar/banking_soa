@@ -26,7 +26,7 @@ public class mainAccount {
                 BASE_URI));
         // Open the URI in Chrome (Windows)
         Runtime rt = Runtime.getRuntime();
-        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8082/mybank.html");
+        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8082/accounts.html");
 
         System.in.read();
         server.shutdownNow();

@@ -6,10 +6,6 @@
 		$scope.account = {};
 		$scope.moneytransfer = {};
 		$scope.reset = {};
-		$scope.account.eventlog = {};
-		$scope.showeventlog = 0; //by default hide the event log
-		$scope.showmoneytable = 0;
-		$scope.showcustomertable = 0;
 
 		$scope.data = {
 			query: "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT(%fields%)), ']') as jsonresult from %TABLE_NAME%;",
@@ -95,7 +91,7 @@
 			});
 		};
 
-		$scope.moneytransfer.executequery = function() {
+		$scope.moneytransfer.executequery = function () {
 			$http({
 				method: 'POST',
 				url: 'http://localhost:8083/mybank/moneytransfer/executequery/',
@@ -140,7 +136,6 @@
 			fieldvalues = "'" + $scope.form.customer.name + "','" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "','0'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.customer.executequery();
-			$scope.data.customer.selectquery();
 			$scope.form.customer = angular.copy($scope.reset);
 		};
 
@@ -150,6 +145,7 @@
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.customer._ID);
 			$scope.customer.executequery();
+			$scope.form.customer = angular.copy($scope.reset);
 		};
 
 		$scope.data.customer.updatequery = function () {
@@ -160,9 +156,18 @@
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.updatefields);
 			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.customer._ID);
 			$scope.customer.executequery();
+			$scope.form.customer = angular.copy($scope.reset);
 		};
 
 		// 'Accounts' functions
+		$scope.data.account.selectquery = function () {
+			$scope.data.query = $scope.data.querytemplate.read;
+			$scope.data.querytype = 0;
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.selectfields);
+			$scope.account.executequery();
+		};
+
 		$scope.data.account.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
@@ -172,6 +177,7 @@
 			fieldvalues = "'" + $scope.form.account.name + "','" + $scope.form.account.balance + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.account.executequery();
+			$scope.form.account = angular.copy($scope.reset);
 		};
 
 		$scope.data.account.deletequery = function () {
@@ -180,28 +186,22 @@
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.account._ID);
 			$scope.account.executequery();
+			$scope.form.account = angular.copy($scope.reset);
 		};
 
 		$scope.data.account.updatequery = function () {
 			$scope.data.query = $scope.data.querytemplate.update;
 			$scope.data.querytype = 1;
-			$scope.data.account.updatefields = "accountname='" + $scope.form.account.name + "',accountbalance='" + $scope.form.account.balance +"'";
+			$scope.data.account.updatefields = "accountname='" + $scope.form.account.name + "',accountbalance='" + $scope.form.account.balance + "'";
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.updatefields);
 			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.account._ID);
 			$scope.account.executequery();
-		};
-
-		$scope.data.account.selectquery = function () {
-			$scope.data.query = $scope.data.querytemplate.read;
-			$scope.data.querytype = 0;
-			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
-			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.selectfields);
-			$scope.account.executequery();
+			$scope.form.account = angular.copy($scope.reset);
 		};
 
 		// 'MoneyTransfer' functions
-		$scope.data.moneytransfer.selectquery = function() {
+		$scope.data.moneytransfer.selectquery = function () {
 			$scope.data.query = $scope.data.querytemplate.read;
 			$scope.data.querytype = 0;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.moneytransfer.tablename);
@@ -209,8 +209,8 @@
 			$scope.moneytransfer.executequery();
 			$scope.showmoneytable = 1;
 		};
-		
-		$scope.data.moneytransfer.insertquery = function() {
+
+		$scope.data.moneytransfer.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
 			$scope.data.querytype = 1;
@@ -219,12 +219,11 @@
 			fieldvalues = "'" + $scope.form.moneytransfer.fromaccount + "','" + $scope.form.moneytransfer.toaccount + "','" + $scope.form.moneytransfer.amount + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.moneytransfer.executequery();
-			$scope.data.moneytransfer.selectquery();
 			$scope.form.moneytransfer = angular.copy($scope.reset);
 		};
 
+		// redundant function for now
 		$scope.data.account.vieweventlog = function () {
-			$scope.showeventlog = 1;
 			$http({
 				method: 'POST',
 				url: 'http://localhost:8082/mybank/account/executequery/',
@@ -248,9 +247,5 @@
 				$scope.statustext = response.statusText;
 				$scope.headers = response.headers();
 			});
-		}
-
-		$scope.hideeventlog = function () {
-			$scope.showeventlog = 0;
 		}
 	});

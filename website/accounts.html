@@ -2,102 +2,90 @@
 <html>
 
 <head>
-	<title>MyBank Account</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>MyBank Accounts</title>
 	<script src="./scripts/angular.1.7.8.js"></script>
 	<script src="./scripts/_mybankAPIgateway.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+	<link rel="stylesheet" href="css/mdb.min.css" />
 </head>
 
-<h1 align=center>MyBank Accounts</h1>
-
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
-	<form id="frm" name="frm">
-		<div align=center>
-			<hr>
-			ID:&nbsp;<input id="accountid" type="text" name="accountid" ng-model="form.account._ID" />&nbsp;
-			Name:&nbsp;<input id="accountname" type="text" name="accountname" ng-model="form.account.name" />&nbsp;
-			Balance:&nbsp;<input id="accountbalance" type="text" name="accountbalance" ng-model="form.account.balance" />&nbsp;
-			<br>
-			<br>
-			<button name="btnselect" ng-click="data.account.selectquery();">Read</button>
-			&nbsp;
-			<button name="btnupdate" ng-click="data.account.updatequery();">Update</button>
-			&nbsp;
-			<button name="btndelete" ng-click="data.account.deletequery();">Delete</button>
-			&nbsp;
-			<button name="btninsert" ng-click="data.account.insertquery();">Create</button>
-		</div>
+	<div class="container-sm">
+		<nav class="navbar navbar-expand-sm navbar-light shadow-0">
+			<a class="navbar-brand text-danger">MyBank</a>
+			<div class="collapse navbar-collapse" id="navbarCollapseID">
+				<div class="navbar-nav">
+					<a class="nav-link text-primary" href="http://localhost:8081/customer.html">Customer</a>
+					<a class="nav-link text-secondary active" href="#">Accounts</a>
+					<a class="nav-link text-warning" href="http://localhost:8083/moneytransfer.html">Money Transfer</a>
+				</div>
+			</div>
+		</nav>
+		<div class="display-5 text-center mt-2 text-secondary">Accounts</div>
+		<hr class="mt-4 mb-4" />
+		<form id="frm" name="frm">
+			<div class="text-center">
+				<div class="row">
+					<div class="col">
+						<div class="form-outline">
+							<input class="form-control" id="accountid" type="text" name="accountid"
+								ng-model="form.account._ID" />
+							<label class="form-label" for="accountid">Customer ID</label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-outline">
+							<input class="form-control" id="accountname" type="text" name="accountname"
+								ng-model="form.account.name" />
+							<label class="form-label" for="accountname">Name</label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-outline">
+							<input class="form-control" id="accountbalance" type="text" name="accountbalance"
+								ng-model="form.account.balance" />
+							<label class="form-label" for="accountbalance">Balance</label>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="btn-group" role="submit" aria-label="Submit Buttons">
+					<button class="btn btn-lg btn-secondary" name="btnselect"
+						ng-click="data.account.selectquery();">Read</button>
+					<button class="btn btn-lg btn-secondary" name="btnupdate"
+						ng-click="data.account.updatequery();">Update</button>
+					<button class="btn btn-lg btn-secondary" name="btndelete"
+						ng-click="data.account.deletequery();">Delete</button>
+					<button class="btn btn-lg btn-secondary" name="btninsert"
+						ng-click="data.account.insertquery();data.account.selectquery();">Create</button>
+				</div>
+			</div>
+		</form>
 		<br>
-		<hr>
-		<div align=center>
-			<br><b>ACCOUNTS LIST</b>
-			<br>
-			<table align="center">
-				<tr>
-					<td align="center">ID</td>
-					<td align="center">ACCOUNT NAME</td>
-					<td align="center">BALANCE</td>
-				</tr>
-				<tr>
-					<td colspan=100%>
-						<hr>
-					</td>
-				</tr>
-				<tr style="color:blue;" ng-repeat="account in data.queryresponse">
-					<td align="center">{{account._ID}}</td>
-					<td align="center">{{account.accountname}}</td>
-					<td align="center">{{account.accountbalance}}</td>
-				</tr>
-			</table>
-		</div>
-
-		<div align=center>
-			<br>
-			<hr>
-			<a href="mybank.html">Back to Main Menu</a>
-			<br>
-			<br>
-			<button name="btnvieweventlog" ng-click="data.account.vieweventlog();">View Event Log</button>
-			<button name="btnhideeventlog" ng-click="hideeventlog();">Hide Event/Debug</button>
-			<br />
-			<br />
-			<div id="eventlog" ng-show="showeventlog==1">
-				<table align="center">
+		<div class="card text-center shadow-2-strong" ng-if="data.queryresponse.length > 0">
+			<div class="card-header text-right bg-secondary text-white">
+				List of Accounts
+			</div>
+			<div class="card-body">
+				<table class="table table-sm">
 					<tr>
-						<td align="center">DATE-TIME</td>
-						<td align="center">SOURCE</td>
-						<td align="center">DESTINATION</td>
-						<td align="center">STATUS</td>
-						<td align="center">DIRECTION</td>
-						<td align="center">EVENT DATA</td>
+						<th scope="col" class="text-center">Account ID</td>
+						<th scope="col" class="text-center">Name</td>
+						<th scope="col" class="text-center">Balance</td>
 					</tr>
-					<tr>
-						<td colspan=100%>
-							<hr>
-						</td>
-					</tr>
-
-					<tr style="color:maroon;" ng-repeat="event in account.eventlog">
-						<td align="center">{{event.createdate}}</td>
-						<td align="center">{{event.eventsource}}</td>
-						<td align="center">{{event.eventdestination}}</td>
-						<td align="center">{{event.eventstatus}}</td>
-						<td align="center">{{event.eventdirection}}</td>
-						<td align="center">{{event.eventdata}}</td>
+					<tr ng-repeat="account in data.queryresponse">
+						<th scope="col" class="text-center">{{account._ID}}</td>
+						<td class="text-center">{{account.accountname}}</td>
+						<td class="text-center">{{account.accountbalance}}</td>
 					</tr>
 				</table>
 			</div>
-			<hr />
 		</div>
-	</form>
-
-	<div id="debug" ng-show="showeventlog==1" align="center"
-		style="background-color:slategray;color:white; padding: 1%;">
-		<font color=firebrick><b>DEBUG</b></font>
-		<br><u>Event Query:</u> {{data.eventquery}}
-		<br><u>Query:</u></b> {{data.query}}
-		<br><u>Query Type:</u> {{data.querytype}}
-		<br><u>Fired Query Status:</u> {{msg}}
+	</div>
 	</div>
 </body>
+<script type="text/javascript" src="js/mdb.min.js"></script>
 
 </html>
