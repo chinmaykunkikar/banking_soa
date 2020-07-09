@@ -1,6 +1,6 @@
 	var _mybankAPIgateway = angular.module('_mybankAPIgateway', []);
 
-	_mybankAPIgateway.controller('_mybankAPIgatewayController', function ($scope, $http) {
+	_mybankAPIgateway.controller('_mybankAPIgatewayController', ["$scope","$http", function ($scope, $http) {
 
 		$scope.customer = {};
 		$scope.account = {};
@@ -248,4 +248,4 @@
 				$scope.headers = response.headers();
 			});
 		}
-	});
+	}]);
