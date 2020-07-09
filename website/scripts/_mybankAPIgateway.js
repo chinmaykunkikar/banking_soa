@@ -8,8 +8,8 @@
 		$scope.reset = {};
 		$scope.account.eventlog = {};
 		$scope.showeventlog = 0; //by default hide the event log
-		$scope.showdebuglog = 0;
 		$scope.showmoneytable = 0;
+		$scope.showcustomertable = 0;
 
 		$scope.data = {
 			query: "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT(%fields%)), ']') as jsonresult from %TABLE_NAME%;",
@@ -122,6 +122,15 @@
 		};
 
 		// 'Customer' functions
+		$scope.data.customer.selectquery = function () {
+			$scope.data.query = $scope.data.querytemplate.read;
+			$scope.data.querytype = 0;
+			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
+			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.selectfields);
+			$scope.customer.executequery();
+			$scope.showcustomertable = 1;
+		};
+
 		$scope.data.customer.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
@@ -131,6 +140,8 @@
 			fieldvalues = "'" + $scope.form.customer.name + "','" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "','0'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.customer.executequery();
+			$scope.data.customer.selectquery();
+			$scope.form.customer = angular.copy($scope.reset);
 		};
 
 		$scope.data.customer.deletequery = function () {
@@ -148,14 +159,6 @@
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.updatefields);
 			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.customer._ID);
-			$scope.customer.executequery();
-		};
-
-		$scope.data.customer.selectquery = function () {
-			$scope.data.query = $scope.data.querytemplate.read;
-			$scope.data.querytype = 0;
-			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
-			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.selectfields);
 			$scope.customer.executequery();
 		};
 
@@ -250,9 +253,4 @@
 		$scope.hideeventlog = function () {
 			$scope.showeventlog = 0;
 		}
-
-		$scope.viewdebuglog = function () {
-			$scope.showdebuglog = 1;
-		}
-
 	});
