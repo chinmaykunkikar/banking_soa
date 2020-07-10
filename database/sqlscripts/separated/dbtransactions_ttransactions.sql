@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dbmoneytransfer` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `dbmoneytransfer`;
+CREATE DATABASE  IF NOT EXISTS `dbtransactions` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `dbtransactions`;
 -- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
--- Host: localhost    Database: dbmoneytransfer
+-- Host: localhost    Database: dbtransactions
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -18,22 +18,25 @@ USE `dbmoneytransfer`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `taccount`
+-- Table structure for table `ttransactions`
 --
 
-DROP TABLE IF EXISTS `taccount`;
+DROP TABLE IF EXISTS `ttransactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `taccount` (
+CREATE TABLE `ttransactions` (
   `_id` smallint unsigned NOT NULL AUTO_INCREMENT,
-  `accountname` varchar(50) DEFAULT NULL,
-  `accountbalance` int unsigned DEFAULT NULL,
+  `idsender` smallint unsigned NOT NULL,
+  `idreceiver` smallint unsigned NOT NULL,
+  `transferamount` int DEFAULT '50000',
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `lastmodifieddate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `createdby` varchar(255) DEFAULT 'SYS',
-  `lastmodifiedby` varchar(255) DEFAULT 'SYS',
-  PRIMARY KEY (`_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `createdby` varchar(20) DEFAULT 'SYS',
+  PRIMARY KEY (`_id`),
+  KEY `fk_taccount_from_idx` (`idsender`),
+  KEY `fk_account_to_idx` (`idreceiver`),
+  CONSTRAINT `fk_account_to` FOREIGN KEY (`idreceiver`) REFERENCES `taccount` (`_id`),
+  CONSTRAINT `fk_taccount_from` FOREIGN KEY (`idsender`) REFERENCES `taccount` (`_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -44,13 +47,16 @@ CREATE TABLE `taccount` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `moneytransfer_insert` AFTER INSERT ON `taccount` FOR EACH ROW BEGIN
-  IF @trigger_flag = 1 THEN
-    SET @trigger_flag = NULL;
-  ELSE
-    SET @trigger_flag = 1;
-    INSERT INTO dbaccount.taccount (accountname, accountbalance) VALUES (NEW.accountname, NEW.accountbalance);
-  END IF;
+/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `new_transaction` AFTER INSERT ON `ttransactions` FOR EACH ROW BEGIN
+
+    UPDATE dbtransactions.taccount as A
+	SET A.accountbalance = A.accountbalance - NEW.transferamount
+	where A._id = NEW.idsender;
+	
+    UPDATE dbtransactions.taccount as A
+	SET A.accountbalance = A.accountbalance + NEW.transferamount
+	where A._id = NEW.idreceiver;
+	
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -66,40 +72,8 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `moneytransfer_update` AFTER UPDATE ON `taccount` FOR EACH ROW BEGIN
-IF @trigger_flag = 1 THEN
-    SET @trigger_flag = NULL;
-  ELSE
-    SET @trigger_flag = 1;
-IF NEW.accountname <> OLD.accountname or NEW.accountbalance <> OLD.accountbalance THEN
-UPDATE `dbaccount`.`taccount` SET
-    accountname = NEW.accountname,
-    accountbalance = NEW.accountbalance
-WHERE _id = NEW._id;
-END IF;
-END IF;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `moneytransfer_delete` AFTER DELETE ON `taccount` FOR EACH ROW BEGIN
-IF @trigger_flag = 1 THEN
-    SET @trigger_flag = NULL;
-  ELSE
-  SET @trigger_flag = 1;
-  DELETE from `dbaccount`.`taccount` where _id = OLD._id;
-  END IF;
+/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `txn_update` BEFORE UPDATE ON `ttransactions` FOR EACH ROW BEGIN
+signal sqlstate '45000' set message_text = 'UPDATE on transaction prevented';
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -116,4 +90,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-08  3:48:40
+-- Dump completed

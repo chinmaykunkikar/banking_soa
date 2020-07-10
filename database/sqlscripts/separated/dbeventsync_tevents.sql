@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dbcustomer` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `dbcustomer`;
+CREATE DATABASE  IF NOT EXISTS `dbeventsync` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `dbeventsync`;
 -- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
--- Host: localhost    Database: dbcustomer
+-- Host: localhost    Database: dbeventsync
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -18,23 +18,26 @@ USE `dbcustomer`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tcustomer`
+-- Table structure for table `tevents`
 --
 
-DROP TABLE IF EXISTS `tcustomer`;
+DROP TABLE IF EXISTS `tevents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tcustomer` (
-  `_id` smallint unsigned NOT NULL AUTO_INCREMENT,
-  `customername` varchar(50) DEFAULT NULL,
-  `customeraddress` varchar(255) DEFAULT NULL,
-  `customerphone` varchar(20) DEFAULT '88776655',
+CREATE TABLE `tevents` (
+  `_id` int NOT NULL AUTO_INCREMENT,
+  `eventid` int NOT NULL,
+  `eventsource` varchar(400) DEFAULT '',
+  `eventdestination` varchar(400) DEFAULT '',
+  `eventdata` json DEFAULT NULL,
+  `eventstatus` int DEFAULT '0',
+  `eventdirection` int DEFAULT '-1',
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `lastmodifieddate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `createdby` varchar(255) DEFAULT 'SYS',
   `lastmodifiedby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -46,4 +49,4 @@ CREATE TABLE `tcustomer` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-08  3:48:39
+-- Dump completed

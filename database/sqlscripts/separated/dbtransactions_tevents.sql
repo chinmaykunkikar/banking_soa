@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dbaccount` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `dbaccount`;
+CREATE DATABASE  IF NOT EXISTS `dbtransactions` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `dbtransactions`;
 -- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
--- Host: localhost    Database: dbaccount
+-- Host: localhost    Database: dbtransactions
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -37,7 +37,7 @@ CREATE TABLE `tevents` (
   `createdby` varchar(255) DEFAULT 'SYS',
   `lastmodifiedby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +49,4 @@ CREATE TABLE `tevents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-08  3:48:40
+-- Dump completed
