@@ -23,10 +23,11 @@ public class svcCustomer {
 	public jeventClient eventclient;
 	final int READ_QUERY = 0;
 	final int WRITE_QUERY = 1;
+	final public String serviceName = "customer";
 
 	public svcCustomer() {
 		db = new dbsql(0);
-		eventclient = new jeventClient("customer");
+		eventclient = new jeventClient(serviceName);
 	}
 
 	@POST
@@ -72,10 +73,6 @@ public class svcCustomer {
 		} catch (Exception e) {
 			throw new HTTPException(400);
 		}
-	}
-
-	public void sendEvent(String eventdata) {
-		eventclient.sendEvent(eventdata);
 	}
 
 	// sync the event locally as received from event synchronizer

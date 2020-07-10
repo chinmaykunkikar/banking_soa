@@ -23,11 +23,12 @@ public class svcEventSync {
 	public String query;
 	final int READ_QUERY = 0;
 	final int WRITE_QUERY = 1;
+	final public String serviceName = "eventsync";
 
 	// dbsql 0:customer 1:accounts 2:transactions 3:events
 	public svcEventSync() {
 		db = new dbsql(3);
-		eventclient = new jeventClient("eventsync");
+		eventclient = new jeventClient(serviceName);
 	}
 
 	@POST

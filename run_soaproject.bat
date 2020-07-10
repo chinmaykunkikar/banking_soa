@@ -21,18 +21,6 @@ jar cvf jdatabase.jar ./jdatabase/*.class json-simple-1.1.1.jar mysql-connector-
 echo - Done
 
 echo:
-echo - Installing mysql-connector-java-8.0.18.jar
-echo:
-call mvn install:install-file -Dfile=.\mysql-connector-java-8.0.18.jar -DgroupId=mysql -DartifactId=mysql-connector-java -Dversion=8.0.18 -Dpackaging=jar -DgeneratePom=true >> run_jdatabase.log 2>&1
-echo - Done
-
-echo:
-echo - Installing json-simple-1.1.1.jar
-echo:
-call mvn install:install-file -Dfile=.\json-simple-1.1.1.jar -DgroupId=com.googlecode.json-simple -DartifactId=json-simple -Dversion=1.1.1 -Dpackaging=jar -DgeneratePom=true >> run_jdatabase.log 2>&1
-echo - Done
-
-echo:
 echo - Installing jdatabase.jar
 echo:
 call mvn install:install-file -Dfile=.\jdatabase.jar -DgroupId=mysql -DartifactId=jdatabase -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true >> run_jdatabase.log 2>&1
@@ -45,6 +33,7 @@ echo ------------------------------
 timeout 2 > nul
 echo:
 java -cp "json-simple-1.1.1.jar";"mysql-connector-java-8.0.18.jar"; jdatabase.dbsql
+echo:
 echo - Done
 echo:
 cd ..

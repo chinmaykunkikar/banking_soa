@@ -64,17 +64,15 @@ public class dbsql {
 	// querytype = 0 means SELECT query, querytype 1 means data manipulation query
 	public static String executequery(final String query, final int querytype) {
 
-		Statement stmt; // SELECT
-		PreparedStatement preparedStmt; // UPDATE, DELETE, INSERT
+		Statement stmt; // SELECT, UPDATE, DELETE, INSERT
 		ResultSet rs;
 		String sResult;
 
 		sResult = "";
 		boolean displayResult = true;
-		String querydelimiter = ":::";
 
 		try {
-			System.out.println("Running query against - db: " + databasename + "; user:" + databaseusername
+			System.out.println("\nRunning query against - db: " + databasename + "; user:" + databaseusername
 					+ "; password:" + databasepassword);
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -91,27 +89,18 @@ public class dbsql {
 				}
 
 			} else if (querytype == WRITE_QUERY) {
-				System.out.println("Executing query type 1: " + query);
-				String[] querylist = query.split(querydelimiter);
-				String q = "";
-				System.out.println("Total queries to execute: " + querylist.length);
-
-				for (int i = 0; i < querylist.length; i++) {
-					q = querylist[i]; // + ";"; //add the semi colon back for each query
-					System.out.print("\nExecuting query: " + q);
-					preparedStmt = con.prepareStatement(q);
-					preparedStmt.execute();
-				}
+				System.out.println("\nExecuting query type 1: " + query);
+				stmt.executeUpdate(query);
 				sResult = "[{'success': 'WRITE_QUERY executed'}]";
 			}
 			con.close();
 
 		} catch (Exception e) {
-			sResult = "[{'error':'" + e.toString() + "'}]";
+			sResult = e.toString();
 		}
 
 		if (displayResult)
-			System.out.println("Result: " + sResult);
+			System.out.println("\nResult: " + sResult + "\n");
 		else
 			System.out.println("Read successful!");
 		return sResult;
