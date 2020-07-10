@@ -36,7 +36,7 @@ CREATE TABLE `ttransactions` (
   KEY `fk_account_to_idx` (`idreceiver`),
   CONSTRAINT `fk_account_to` FOREIGN KEY (`idreceiver`) REFERENCES `taccount` (`_id`),
   CONSTRAINT `fk_taccount_from` FOREIGN KEY (`idsender`) REFERENCES `taccount` (`_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;

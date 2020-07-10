@@ -23,6 +23,7 @@ public class jeventClient {
 	private static String eventsyncURI = "http://localhost:8084/mybank";
 	private static WebTarget service = null;
 	private static String eventsource;
+	private static String eventdestination;
 	private static Client client;
 
 	public jeventClient(String eventsrc) {
@@ -30,20 +31,11 @@ public class jeventClient {
 		client = ClientBuilder.newClient(config);
 		service = client.target(getBaseURI(eventsyncURI));
 		eventsource = eventsrc;
+		eventdestination = eventsrc; // for now
 	}
 
 	public static void main(String args[]) {
 		System.out.println("Event client is initialized sync events at: " + eventsyncURI);
-	}
-
-	public Response sendevent(JSONObject inputJsonObj) {
-		Response resp = service.path("event").path("sync").request(MediaType.APPLICATION_JSON)
-				.post(Entity.json(inputJsonObj.toString()));
-
-		String output = resp.readEntity(String.class);
-		System.out.println(output);
-
-		return resp;
 	}
 
 	public Response sendEvent(String data) {
@@ -87,7 +79,7 @@ public class jeventClient {
 		// within query
 		eventdata = eventdata.replace("'", "\\'");
 		query = "INSERT INTO tEvents (eventdata, eventdestination, eventstatus,  eventdirection,  eventid,  eventsource)  VALUES ('"
-				+ eventdata + "','" + eventsource + "', 0, 2, -1,'unknown');";
+				+ eventdata + "','" + eventdestination + "', 0, 2, -1,'" + eventsource + "');";
 		System.out.println("Query to be fired: " + query);
 		jsonresult = db.executequery(query, querytype); // return json result from the query
 		System.out.println("jeventClient executequery result: " + jsonresult);

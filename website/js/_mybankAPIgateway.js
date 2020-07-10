@@ -133,7 +133,7 @@
 			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.insertfields);
-			fieldvalues = "'" + $scope.form.customer.name + "','" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "','0'";
+			fieldvalues = "'" + $scope.form.customer.name + "','" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.customer.executequery();
 			$scope.form.customer = angular.copy($scope.reset);
@@ -151,7 +151,7 @@
 		$scope.data.customer.updatequery = function () {
 			$scope.data.query = $scope.data.querytemplate.update;
 			$scope.data.querytype = 1;
-			$scope.data.customer.updatefields = "customername='" + $scope.form.customer.name + "'";
+			$scope.data.customer.updatefields = "customername='" + $scope.form.customer.name + "',customeraddress='" + $scope.form.customer.address + "',customerphone='" + $scope.form.customer.phone + "'";
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.updatefields);
 			$scope.data.query = $scope.data.query.replace(/%_ID%/, $scope.form.customer._id);

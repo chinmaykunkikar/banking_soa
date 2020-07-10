@@ -34,7 +34,7 @@ CREATE TABLE `taccount` (
   `lastmodifiedby` varchar(20) DEFAULT 'SYS',
   PRIMARY KEY (`_id`),
   KEY `fk_customer_name_idx` (`accountname`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;

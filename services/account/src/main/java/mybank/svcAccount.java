@@ -23,10 +23,11 @@ public class svcAccount {
 	public String query;
 	final int READ_QUERY = 0;
 	final int WRITE_QUERY = 1;
+	final public String serviceName = "account";
 
 	public svcAccount() {
 		db = new dbsql(1);
-		eventclient = new jeventClient("account");
+		eventclient = new jeventClient(serviceName);
 	}
 
 	@POST
