@@ -52,10 +52,6 @@ public class dbsql {
 			databaseusername = cmn.getJsonStringValue(dbConfigFileName, "databaseusername");
 			databasepassword = cmn.getJsonStringValue(dbConfigFileName, "databasepassword");
 			databasetestquery = cmn.getJsonStringValue(dbConfigFileName, "databasetestquery");
-
-			// System.out.println("Initializing db - name: " + databasename + "; user: " + databaseusername + "; password: "
-			// 		+ databasepassword);
-			// System.out.println("Test query: " + databasetestquery);
 		} catch (Exception e) {
 			System.out.println("jdatabase error: " + e.toString());
 		}
@@ -65,44 +61,39 @@ public class dbsql {
 	public static String executequery(final String query, final int querytype) {
 
 		Statement stmt; // SELECT, UPDATE, DELETE, INSERT
-		ResultSet rs;
-		String sResult;
-
-		sResult = "";
-		boolean displayResult = true;
+		String sResult = "";
 
 		try {
 			System.out.println("\nRunning query against - db: " + databasename + "; user:" + databaseusername
-					+ "; password:" + databasepassword);
+					+ "; password:" + databasepassword + "\n");
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + databasename,
 					databaseusername, databasepassword);
 
 			stmt = con.createStatement();
-
-			if (querytype == READ_QUERY) {
-				displayResult = false;
-				rs = stmt.executeQuery(query);
-				while (rs.next()) {
-					sResult = rs.getString(1);
+			boolean results = stmt.execute(query);
+			int count = 0;
+			do {
+				if (results) {
+					ResultSet rs = stmt.getResultSet();
+					while (rs.next()) {
+						sResult = rs.getString(1);
+					}
+				} else {
+					count = stmt.getUpdateCount();
+					if (count >= 0) {
+						sResult = "[{'success': 'WRITE_QUERY executed'}]";
+					}
 				}
-
-			} else if (querytype == WRITE_QUERY) {
-				System.out.println("\nExecuting query type 1: " + query);
-				stmt.executeUpdate(query);
-				sResult = "[{'success': 'WRITE_QUERY executed'}]";
-			}
+				results = stmt.getMoreResults();
+			} while (results || count != -1);
+			stmt.close();
 			con.close();
 
 		} catch (Exception e) {
 			sResult = e.toString();
 		}
-
-		if (displayResult)
-			System.out.println("\nResult: " + sResult + "\n");
-		else
-			System.out.println("Read successful!");
 		return sResult;
 	}
 }
