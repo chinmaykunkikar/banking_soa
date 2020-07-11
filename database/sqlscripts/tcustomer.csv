@@ -1,0 +1,6 @@
+"_id","customername","customeraddress","customerphone","createdate","lastmodifieddate","createdby","lastmodifiedby"
+1,"one","ahemdabad","88776655","2020-07-10 00:34:45","2020-07-10 00:34:45","SYS","SYS"
+2,"two","bombay","88776655","2020-07-10 00:34:45","2020-07-10 00:34:45","SYS","SYS"
+3,"three","calcutta","88776655","2020-07-10 00:34:45","2020-07-10 00:34:45","SYS","SYS"
+4,"four","delhi","88776655","2020-07-10 00:34:45","2020-07-10 00:34:45","SYS","SYS"
+5,"five","bangalore","undefined","2020-07-10 22:54:25","2020-07-10 22:54:25","SYS","SYS"

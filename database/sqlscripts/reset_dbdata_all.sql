@@ -6,3 +6,5 @@ delete from `dbaccount`.`taccount`;
 alter table `dbaccount`.`taccount` AUTO_INCREMENT = 1;
 delete from `dbcustomer`.`tcustomer`;
 alter table `dbcustomer`.`tcustomer` AUTO_INCREMENT = 1;
+delete from `dbaccount`.`tcustomer`;
+alter table `dbaccount`.`tcustomer` AUTO_INCREMENT = 1;
