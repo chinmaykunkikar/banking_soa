@@ -68,8 +68,7 @@ public class jeventClient {
 		// store the event in local database as per dbConfigFileName
 		// return status 0, 1
 		String query, jsonresult;
-		int querytype = 1; // insert, update, delete queries are set to 1
-
+		
 		// since we are synching locally eventdestination is the source that is set
 		// we do not know who sent the message,hence event source is unknown for now
 		// eventstatus = 0 means event is saved and needs to be processed
@@ -81,7 +80,7 @@ public class jeventClient {
 		query = "INSERT INTO tEvents (eventdata, eventdestination, eventstatus,  eventdirection,  eventid,  eventsource)  VALUES ('"
 				+ eventdata + "','" + eventdestination + "', 0, 2, -1,'" + eventsource + "');";
 		System.out.println("Query to be fired: " + query);
-		jsonresult = db.executequery(query, querytype); // return json result from the query
+		jsonresult = db.executequery(query); // return json result from the query
 		System.out.println("jeventClient executequery result: " + jsonresult);
 		return jsonresult;
 	}

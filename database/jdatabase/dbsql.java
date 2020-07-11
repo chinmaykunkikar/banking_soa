@@ -3,9 +3,6 @@ package jdatabase;
 import java.sql.*;
 
 public class dbsql {
-	static final int READ_QUERY = 0;
-	static final int WRITE_QUERY = 1;
-
 	private static String databasename = "null";
 	private static String databaseusername = "null";
 	private static String databasepassword = "null";
@@ -21,7 +18,7 @@ public class dbsql {
 			String query = databasetestquery; // get databasequery from initializedatabase()
 
 			System.out.println("Executing query: " + query);
-			data = executequery(query, READ_QUERY);
+			data = executequery(query);
 			System.out.println("\nResult: " + data);
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -57,8 +54,7 @@ public class dbsql {
 		}
 	}
 
-	// querytype = 0 means SELECT query, querytype 1 means data manipulation query
-	public static String executequery(final String query, final int querytype) {
+	public static String executequery(final String query) {
 
 		Statement stmt; // SELECT, UPDATE, DELETE, INSERT
 		String sResult = "";

@@ -21,8 +21,6 @@ public class svcTransactions {
 	public dbsql db;
 	public jeventClient eventclient;
 	public String query;
-	final int READ_QUERY = 0;
-	final int WRITE_QUERY = 1;
 	final public String serviceName = "transactions";
 
 	public svcTransactions() {
@@ -44,9 +42,8 @@ public class svcTransactions {
 
 			// get the query and query type
 			String query = (String) jo.get("query");
-			int querytype = ((Long) jo.get("querytype")).intValue();
 
-			jsonresult = db.executequery(query, querytype);
+			jsonresult = db.executequery(query);
 
 			// workaround to avoid milliseconds from the query result
 			jsonresult = jsonresult.replace(".000000", "");

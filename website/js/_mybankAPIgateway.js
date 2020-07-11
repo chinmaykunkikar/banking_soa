@@ -9,7 +9,6 @@
 
 		$scope.data = {
 			query: "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT(%fields%)), ']') as jsonresult from %TABLE_NAME%;",
-			querytype: 0,
 			queryresponse: "",
 			eventquery: "SELECT CONCAT('[', GROUP_CONCAT(JSON_OBJECT('eventsource',eventsource,'eventdestination',eventdestination,'eventstatus',eventstatus,'eventdirection',eventdirection,'eventdata',eventdata,'createdate',createdate) order by createdate desc), ']') as jsonresult from tEvents;"
 		};
@@ -45,8 +44,7 @@
 				url: 'http://localhost:8081/mybank/customer/executequery/',
 				dataType: 'json',
 				data: {
-					query: $scope.data.query,
-					querytype: $scope.data.querytype
+					query: $scope.data.query
 				},
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'
@@ -71,8 +69,7 @@
 				url: 'http://localhost:8082/mybank/account/executequery/',
 				dataType: 'json',
 				data: {
-					query: $scope.data.query,
-					querytype: $scope.data.querytype
+					query: $scope.data.query
 				},
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'
@@ -97,8 +94,7 @@
 				url: 'http://localhost:8083/mybank/transactions/executequery/',
 				dataType: 'json',
 				data: {
-					query: $scope.data.query,
-					querytype: $scope.data.querytype
+					query: $scope.data.query
 				},
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'
@@ -120,7 +116,6 @@
 		// 'Customer' functions
 		$scope.data.customer.selectquery = function () {
 			$scope.data.query = $scope.data.querytemplate.read;
-			$scope.data.querytype = 0;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.selectfields);
 			$scope.customer.executequery();
@@ -130,7 +125,6 @@
 		$scope.data.customer.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
-			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.insertfields);
 			fieldvalues = "'" + $scope.form.customer.name + "','" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "'";
@@ -141,7 +135,6 @@
 
 		$scope.data.customer.deletequery = function () {
 			$scope.data.query = $scope.data.querytemplate.delete;
-			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.customer._id);
 			$scope.customer.executequery();
@@ -150,7 +143,6 @@
 
 		$scope.data.customer.updatequery = function () {
 			$scope.data.query = $scope.data.querytemplate.update;
-			$scope.data.querytype = 1;
 			$scope.data.customer.updatefields = "customername='" + $scope.form.customer.name + "',customeraddress='" + $scope.form.customer.address + "',customerphone='" + $scope.form.customer.phone + "'";
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.updatefields);
@@ -162,7 +154,6 @@
 		// 'Accounts' functions
 		$scope.data.account.selectquery = function () {
 			$scope.data.query = $scope.data.querytemplate.read;
-			$scope.data.querytype = 0;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.selectfields);
 			$scope.account.executequery();
@@ -171,7 +162,6 @@
 		$scope.data.account.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
-			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.insertfields);
 			fieldvalues = "'" + $scope.form.account.name + "','" + $scope.form.account.balance + "'";
@@ -182,7 +172,6 @@
 
 		$scope.data.account.deletequery = function () {
 			$scope.data.query = $scope.data.querytemplate.delete;
-			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%ID_LIST%/, $scope.form.account._id);
 			$scope.account.executequery();
@@ -191,7 +180,6 @@
 
 		$scope.data.account.updatequery = function () {
 			$scope.data.query = $scope.data.querytemplate.update;
-			$scope.data.querytype = 1;
 			$scope.data.account.updatefields = "accountname='" + $scope.form.account.name + "',accountbalance='" + $scope.form.account.balance + "'";
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.updatefields);
@@ -203,7 +191,6 @@
 		// 'Transactions' functions
 		$scope.data.transactions.selectquery = function () {
 			$scope.data.query = $scope.data.querytemplate.read;
-			$scope.data.querytype = 0;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.transactions.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.transactions.selectfields);
 			$scope.transactions.executequery();
@@ -212,7 +199,6 @@
 		$scope.data.transactions.insertquery = function () {
 			var fieldvalues = "";
 			$scope.data.query = $scope.data.querytemplate.create;
-			$scope.data.querytype = 1;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.transactions.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.transactions.insertfields);
 			fieldvalues = "'" + $scope.form.transactions.idsender + "','" + $scope.form.transactions.idreceiver + "','" + $scope.form.transactions.transferamount + "'";
@@ -228,8 +214,7 @@
 				url: 'http://localhost:8082/mybank/account/executequery/',
 				dataType: 'json',
 				data: {
-					query: $scope.data.eventquery,
-					querytype: 0
+					query: $scope.data.eventquery
 				},
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'

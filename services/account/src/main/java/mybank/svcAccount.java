@@ -21,8 +21,6 @@ public class svcAccount {
 	public dbsql db;
 	public jeventClient eventclient;
 	public String query;
-	final int READ_QUERY = 0;
-	final int WRITE_QUERY = 1;
 	final public String serviceName = "account";
 
 	public svcAccount() {
@@ -44,9 +42,8 @@ public class svcAccount {
 
 			// get the query and query type
 			String query = (String) jo.get("query");
-			int querytype = ((Long) jo.get("querytype")).intValue();
 
-			jsonresult = db.executequery(query, querytype);
+			jsonresult = db.executequery(query);
 
 			System.out.println("svcAccount executequery result: " + jsonresult);
 

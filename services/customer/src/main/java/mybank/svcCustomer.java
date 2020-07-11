@@ -21,8 +21,6 @@ public class svcCustomer {
 	public dbsql db;
 	public String query;
 	public jeventClient eventclient;
-	final int READ_QUERY = 0;
-	final int WRITE_QUERY = 1;
 	final public String serviceName = "customer";
 
 	public svcCustomer() {
@@ -46,13 +44,12 @@ public class svcCustomer {
 
 			// get the query and query type
 			String query = (String) jo.get("query");
-			int querytype = ((Long) jo.get("querytype")).intValue();
 
-			jsonresult = db.executequery(query, querytype);
+			jsonresult = db.executequery(query);
 
 			System.out.println("svcCustomer executequery result: " + jsonresult);
 
-			// at present we are just forwarding the query and querytype as it is received
+			// at present we are just forwarding the query as it is received
 			// we may have to create a standard json data for events which contains source,
 			// destination
 			eventclient.sendEvent(data);
