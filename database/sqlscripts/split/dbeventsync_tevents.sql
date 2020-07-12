@@ -25,19 +25,16 @@ DROP TABLE IF EXISTS `tevents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tevents` (
-  `_id` int NOT NULL AUTO_INCREMENT,
-  `eventid` int NOT NULL,
+  `_id` smallint NOT NULL AUTO_INCREMENT,
   `eventsource` varchar(400) DEFAULT '',
   `eventdestination` varchar(400) DEFAULT '',
   `eventdata` json DEFAULT NULL,
-  `eventstatus` int DEFAULT '0',
-  `eventdirection` int DEFAULT '-1',
+  `eventstatus` tinyint DEFAULT '0',
+  `eventdirection` tinyint DEFAULT '-1',
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `lastmodifieddate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `createdby` varchar(255) DEFAULT 'SYS',
-  `lastmodifiedby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +46,4 @@ CREATE TABLE `tevents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed
+-- Dump completed on 2020-07-13  1:43:07

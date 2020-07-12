@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dbaccount` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `dbaccount`;
+CREATE DATABASE  IF NOT EXISTS `dbcustomer` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `dbcustomer`;
 -- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
--- Host: localhost    Database: dbaccount
+-- Host: localhost    Database: dbcustomer
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -18,23 +18,23 @@ USE `dbaccount`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `taccount`
+-- Table structure for table `tcustomer`
 --
 
-DROP TABLE IF EXISTS `taccount`;
+DROP TABLE IF EXISTS `tcustomer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `taccount` (
+CREATE TABLE `tcustomer` (
   `_id` smallint unsigned NOT NULL AUTO_INCREMENT,
-  `accountname` varchar(50) DEFAULT NULL,
-  `accountbalance` int unsigned DEFAULT NULL,
+  `customername` varchar(50) NOT NULL DEFAULT 'customer_auto',
+  `customeraddress` varchar(255) DEFAULT NULL,
+  `customerphone` varchar(20) DEFAULT '88776655',
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `lastmodifieddate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `createdby` varchar(20) DEFAULT 'SYS',
-  `lastmodifiedby` varchar(20) DEFAULT 'SYS',
-  PRIMARY KEY (`_id`),
-  KEY `fk_customer_name_idx` (`accountname`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `createdby` varchar(255) DEFAULT 'SYS',
+  `lastmodifiedby` varchar(255) DEFAULT 'SYS',
+  PRIMARY KEY (`_id`,`customername`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -45,12 +45,12 @@ CREATE TABLE `taccount` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `account_insert` AFTER INSERT ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `customer_insert` AFTER INSERT ON `tcustomer` FOR EACH ROW BEGIN
   IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-    INSERT INTO dbtransactions.taccount (accountname,accountbalance) VALUES (NEW.accountname, NEW.accountbalance);
+    INSERT INTO `dbaccount`.`tcustomer`(customername, customeraddress, customerphone) VALUES (NEW.customername, NEW.customeraddress, NEW.customerphone);
   END IF;
 END */;;
 DELIMITER ;
@@ -67,17 +67,18 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `account_update` AFTER UPDATE ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `customer_update` AFTER UPDATE ON `tcustomer` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-IF NEW.accountname <> OLD.accountname or NEW.accountbalance <> OLD.accountbalance THEN
-UPDATE dbtransactions.taccount SET
-    accountname = NEW.accountname,
-    accountbalance = NEW.accountbalance
-WHERE _id = NEW._id;
-END IF;
+	IF NEW.customername <> OLD.customername or NEW.customeraddress <> OLD.customeraddress or NEW.customerphone <> OLD.customerphone THEN
+		UPDATE `dbaccount`.`tcustomer` SET
+		customername = NEW.customername,
+		customeraddress = NEW.customeraddress,
+        customerphone = NEW.customerphone
+		WHERE _id = NEW._id;
+	END IF;
 END IF;
 END */;;
 DELIMITER ;
@@ -94,12 +95,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `account_delete` AFTER DELETE ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `customer_delete` AFTER DELETE ON `tcustomer` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
   SET @trigger_flag = 1;
-  DELETE from dbtransactions.taccount where _id = OLD._id;
+  DELETE from `dbaccount`.`tcustomer` where _id = OLD._id;
   END IF;
 END */;;
 DELIMITER ;
@@ -117,4 +118,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed
+-- Dump completed on 2020-07-13  1:43:06
