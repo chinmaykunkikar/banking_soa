@@ -23,19 +23,22 @@
 		$scope.data.customer = {
 			"tablename": "tcustomer",
 			"insertfields": "customername,customeraddress,customerphone",
-			"selectfields": "'_id',_id,'customername',customername,'customeraddress',customeraddress,'customerphone',customerphone"
+			"selectfields": "'_id',_id,'customername',customername,'customeraddress',customeraddress,'customerphone',customerphone",
+			"eventsource": "customer"
 		};
 
 		$scope.data.account = {
 			"tablename": "taccount",
 			"insertfields": "accountname,accountbalance",
-			"selectfields": "'_id',_id,'accountname',accountname,'accountbalance',accountbalance"
+			"selectfields": "'_id',_id,'accountname',accountname,'accountbalance',accountbalance",
+			"eventsource": "account"
 		};
 
 		$scope.data.transactions = {
 			"tablename": "ttransactions",
 			"insertfields": "idsender,idreceiver,transferamount",
-			"selectfields": "'_id',_id,'createdate',createdate,'idsender',idsender,'idreceiver',idreceiver,'transferamount',transferamount"
+			"selectfields": "'_id',_id,'createdate',createdate,'idsender',idsender,'idreceiver',idreceiver,'transferamount',transferamount",
+			"eventsource": "transactions"
 		};
 
 		$scope.customer.executequery = function () {
@@ -44,7 +47,8 @@
 				url: 'http://localhost:8081/mybank/customer/executequery/',
 				dataType: 'json',
 				data: {
-					query: $scope.data.query
+					query: $scope.data.query,
+					source: $scope.data.customer.eventsource
 				},
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'
@@ -69,7 +73,8 @@
 				url: 'http://localhost:8082/mybank/account/executequery/',
 				dataType: 'json',
 				data: {
-					query: $scope.data.query
+					query: $scope.data.query,
+					source: $scope.data.account.eventsource
 				},
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'
@@ -94,7 +99,8 @@
 				url: 'http://localhost:8083/mybank/transactions/executequery/',
 				dataType: 'json',
 				data: {
-					query: $scope.data.query
+					query: $scope.data.query,
+					source: $scope.data.transactions.eventsource
 				},
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'

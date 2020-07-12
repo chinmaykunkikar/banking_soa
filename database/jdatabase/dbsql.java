@@ -79,7 +79,7 @@ public class dbsql {
 				} else {
 					count = stmt.getUpdateCount();
 					if (count >= 0) {
-						sResult = "[{'success': 'WRITE_QUERY executed'}]";
+						sResult = "DML Query executed successfully";
 					}
 				}
 				results = stmt.getMoreResults();

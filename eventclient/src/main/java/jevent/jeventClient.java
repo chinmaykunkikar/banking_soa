@@ -22,16 +22,14 @@ import jdatabase.*;
 public class jeventClient {
 	private static String eventsyncURI = "http://localhost:8084/mybank";
 	private static WebTarget service = null;
-	private static String eventsource;
 	private static String eventdestination;
 	private static Client client;
 
-	public jeventClient(String eventsrc) {
+	public jeventClient(String serviceName) {
 		ClientConfig config = new ClientConfig();
 		client = ClientBuilder.newClient(config);
 		service = client.target(getBaseURI(eventsyncURI));
-		eventsource = eventsrc;
-		eventdestination = eventsrc; // for now
+		eventdestination = serviceName;
 	}
 
 	public static void main(String args[]) {
@@ -68,18 +66,28 @@ public class jeventClient {
 		// store the event in local database as per dbConfigFileName
 		// return status 0, 1
 		String query, jsonresult;
-		
-		// since we are synching locally eventdestination is the source that is set
-		// we do not know who sent the message,hence event source is unknown for now
+		String eventsource = "";
+
+		// this block will get the eventsource
+		try {
+			eventdata = eventdata.replace("\n", "").replace("\\r", "").replace("\t", "");
+			Object obj = new JSONParser().parse(eventdata);
+			JSONObject jsonObj = (JSONObject) obj;
+			eventsource = (String) jsonObj.get("source");
+		} catch (Exception e) {
+			System.out.println("Returning sendevent failure -");
+			System.out.println("[ {'error':'" + e.toString() + "'}]");
+		}
+
 		// eventstatus = 0 means event is saved and needs to be processed
 		// eventdirection = 2 since its a received event, waiting to be synched locally
 
 		// json data needs the escape character to understand single quote contained
 		// within query
 		eventdata = eventdata.replace("'", "\\'");
-		query = "INSERT INTO tEvents (eventdata, eventdestination, eventstatus,  eventdirection,  eventid,  eventsource)  VALUES ('"
-				+ eventdata + "','" + eventdestination + "', 0, 2, -1,'" + eventsource + "');";
-		System.out.println("Query to be fired: " + query);
+		query = "INSERT INTO tevents (eventsource, eventdestination, eventdata, eventstatus, eventdirection)  VALUES ('"
+				+ eventsource + "','" + eventdestination + "','" + eventdata + "', 0, 2);";
+		System.out.println("Event query being fired: " + query);
 		jsonresult = db.executequery(query); // return json result from the query
 		System.out.println("jeventClient executequery result: " + jsonresult);
 		return jsonresult;

@@ -29,34 +29,6 @@ public class svcEventSync {
 		eventclient = new jeventClient(serviceName);
 	}
 
-	@POST
-	@Path("/executequery")
-	@Produces({ "application/json" })
-	@Consumes({ "application/json" })
-	public Response executequery(String data) {
-		String jsonresult = "";
-
-		try {
-			data = data.replace("\n", "").replace("\\r", "").replace("\t", "");
-			Object obj = new JSONParser().parse(data);
-			JSONObject jo = (JSONObject) obj;
-
-			// get the query and query type
-			String query = (String) jo.get("query");
-
-			jsonresult = db.executequery(query);
-
-			System.out.println("svcEventSync executequery result: " + jsonresult);
-
-		} catch (Exception e) {
-			System.out.println("Returning Post2 failure -");
-			System.out.println("[ {'error':'" + e.toString() + "'}]");
-			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]");
-		}
-
-		return sendjsonresponse(jsonresult);
-	}
-
 	public Response sendjsonresponse(String output) {
 		try {
 			data = output;
