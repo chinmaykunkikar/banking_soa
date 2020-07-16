@@ -46,3 +46,4 @@ eventclient/.project
 *.prefs
 services/account/.project
 services/account/.classpath
+others/testrestclient/mybankeventclient/bin/.project

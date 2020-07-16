@@ -1,8 +1,5 @@
 title jeventClient
 
-:: Change your project dirictory here
-set working_dir=E:\bank_soa
-
 @echo off
 cls
 echo - Compiling jeventClient
@@ -18,7 +15,7 @@ copy .\target\classes\jevent.jar >> run_jevent.log 2>&1
 echo:
 echo - Installing jevent.jar
 echo:
-call mvn install:install-file -Dfile=%working_dir%\eventclient\jevent.jar -DgroupId=myevent -DartifactId=jevent -Dversion=1.0 -Dpackaging=jar -DgeneratePom=true >> run_jevent.log 2>&1
+call mvn install:install-file -Dfile=.\jevent.jar -DgroupId=mybank -DartifactId=jevent -Dversion=2.0 -Dpackaging=jar >> run_jevent.log 2>&1
 
 echo ---------------------------------
 echo - Testing jeventClient connection
