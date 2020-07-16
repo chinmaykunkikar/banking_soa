@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>MyBank Accounts</title>
+	<title>accounts - myBank</title>
 	<script src="./js/angular.min.js"></script>
 	<script src="./js/_mybankAPIgateway.min.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
@@ -14,16 +14,18 @@
 <body ng-app="_mybankAPIgateway" ng-controller="_mybankAPIgatewayController">
 	<div class="container-sm">
 		<nav class="navbar navbar-expand-sm navbar-light shadow-0">
-			<a class="navbar-brand text-danger">MyBank</a>
+			<a class="navbar-brand text-danger font-monospace">myBank</a>
 			<div class="collapse navbar-collapse" id="navbarCollapseID">
 				<div class="navbar-nav">
-					<a class="nav-link text-primary" href="http://localhost:8081/customer.html">Customer</a>
-					<a class="nav-link text-secondary active" href="#">Accounts</a>
-					<a class="nav-link text-warning" href="http://localhost:8083/transactions.html">Transactions</a>
+					<a class="nav-link text-primary font-monospace"
+						href="http://localhost:8081/customer.html">/customer</a>
+					<a class="nav-link font-monospace active" href="#">/accounts</a>
+					<a class="nav-link text-warning font-monospace"
+						href="http://localhost:8083/transactions.html">/transactions</a>
 				</div>
 			</div>
 		</nav>
-		<div class="display-5 text-center mt-2 text-secondary">Accounts</div>
+		<div class="display-5 text-right mt-2 text-secondary font-monospace">/accounts</div>
 		<hr class="mt-4 mb-4" />
 		<form id="frm" name="frm">
 			<div class="text-center">
