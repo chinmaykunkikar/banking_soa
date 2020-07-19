@@ -1,6 +1,6 @@
 	var _mybankAPIgateway = angular.module('_mybankAPIgateway', []);
 
-	_mybankAPIgateway.controller('_mybankAPIgatewayController', ["$scope","$http", function ($scope, $http) {
+	_mybankAPIgateway.controller('_mybankAPIgatewayController', ["$scope", "$http", function ($scope, $http) {
 
 		$scope.customer = {};
 		$scope.account = {};
@@ -22,14 +22,14 @@
 
 		$scope.data.customer = {
 			"tablename": "tcustomer",
-			"insertfields": "customername,customeraddress,customerphone",
+			"insertfields": "_id,customername,customeraddress,customerphone",
 			"selectfields": "'_id',_id,'customername',customername,'customeraddress',customeraddress,'customerphone',customerphone",
 			"eventsource": "customer"
 		};
 
 		$scope.data.account = {
 			"tablename": "taccount",
-			"insertfields": "accountname,accountbalance",
+			"insertfields": "_id,accountname,accountbalance",
 			"selectfields": "'_id',_id,'accountname',accountname,'accountbalance',accountbalance",
 			"eventsource": "account"
 		};
@@ -133,7 +133,7 @@
 			$scope.data.query = $scope.data.querytemplate.create;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.customer.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.customer.insertfields);
-			fieldvalues = "'" + $scope.form.customer.name + "','" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "'";
+			fieldvalues = "'" + $scope.form.customer._id + "','" + $scope.form.customer.name + "','" + $scope.form.customer.address + "','" + $scope.form.customer.phone + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.customer.executequery();
 			$scope.form.customer = angular.copy($scope.reset);
@@ -170,7 +170,7 @@
 			$scope.data.query = $scope.data.querytemplate.create;
 			$scope.data.query = $scope.data.query.replace(/%TABLE_NAME%/, $scope.data.account.tablename);
 			$scope.data.query = $scope.data.query.replace(/%fields%/, $scope.data.account.insertfields);
-			fieldvalues = "'" + $scope.form.account.name + "','" + $scope.form.account.balance + "'";
+			fieldvalues = "'" + $scope.form.account._id + "','" + $scope.form.account.name + "','" + $scope.form.account.balance + "'";
 			$scope.data.query = $scope.data.query.replace(/%values%/, fieldvalues);
 			$scope.account.executequery();
 			$scope.form.account = angular.copy($scope.reset);

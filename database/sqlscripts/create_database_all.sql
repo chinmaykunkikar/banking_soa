@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dbcustomer
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `tcustomer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tcustomer` (
-  `_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `_id` smallint unsigned NOT NULL,
   `customername` varchar(50) NOT NULL DEFAULT 'customer_auto',
   `customeraddress` varchar(255) DEFAULT NULL,
   `customerphone` varchar(20) DEFAULT '88776655',
@@ -40,7 +40,7 @@ CREATE TABLE `tcustomer` (
   `createdby` varchar(255) DEFAULT 'SYS',
   `lastmodifiedby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`,`customername`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -51,12 +51,12 @@ CREATE TABLE `tcustomer` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `customer_insert` AFTER INSERT ON `tcustomer` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `customer_insert` AFTER INSERT ON `tcustomer` FOR EACH ROW BEGIN
   IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-    INSERT INTO `dbaccount`.`tcustomer`(customername, customeraddress, customerphone) VALUES (NEW.customername, NEW.customeraddress, NEW.customerphone);
+    INSERT INTO `dbaccount`.`tcustomer`(_id, customername, customeraddress, customerphone) VALUES (NEW._id, NEW.customername, NEW.customeraddress, NEW.customerphone);
   END IF;
 END */;;
 DELIMITER ;
@@ -73,13 +73,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `customer_update` AFTER UPDATE ON `tcustomer` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `customer_update` AFTER UPDATE ON `tcustomer` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-	IF NEW.customername <> OLD.customername or NEW.customeraddress <> OLD.customeraddress or NEW.customerphone <> OLD.customerphone THEN
+	IF NEW._id <> OLD._id or NEW.customername <> OLD.customername or NEW.customeraddress <> OLD.customeraddress or NEW.customerphone <> OLD.customerphone THEN
 		UPDATE `dbaccount`.`tcustomer` SET
+        _id = NEW._id,
 		customername = NEW.customername,
 		customeraddress = NEW.customeraddress,
         customerphone = NEW.customerphone
@@ -101,7 +102,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `customer_delete` AFTER DELETE ON `tcustomer` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `customer_delete` AFTER DELETE ON `tcustomer` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
@@ -132,7 +133,7 @@ CREATE TABLE `tevents` (
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `createdby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT = 0;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +152,7 @@ DROP TABLE IF EXISTS `taccount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `taccount` (
-  `_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `_id` smallint unsigned NOT NULL,
   `accountname` varchar(50) DEFAULT NULL,
   `accountbalance` int unsigned DEFAULT NULL,
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -159,7 +160,7 @@ CREATE TABLE `taccount` (
   `createdby` varchar(255) DEFAULT 'SYS',
   `lastmodifiedby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -170,12 +171,12 @@ CREATE TABLE `taccount` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `transactions_insert` AFTER INSERT ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `transactions_insert` AFTER INSERT ON `taccount` FOR EACH ROW BEGIN
   IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-    INSERT INTO dbaccount.taccount (accountname, accountbalance) VALUES (NEW.accountname, NEW.accountbalance);
+    INSERT INTO `dbaccount`.`taccount` (_id, accountname, accountbalance) VALUES (NEW._id, NEW.accountname, NEW.accountbalance);
   END IF;
 END */;;
 DELIMITER ;
@@ -192,13 +193,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `transactions_update` AFTER UPDATE ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `transactions_update` AFTER UPDATE ON `taccount` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-IF NEW.accountname <> OLD.accountname or NEW.accountbalance <> OLD.accountbalance THEN
+IF NEW._id <> OLD._id or NEW.accountname <> OLD.accountname or NEW.accountbalance <> OLD.accountbalance THEN
 UPDATE `dbaccount`.`taccount` SET
+    _id = NEW._id,
     accountname = NEW.accountname,
     accountbalance = NEW.accountbalance
 WHERE _id = NEW._id;
@@ -219,7 +221,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `transactions_delete` AFTER DELETE ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `transactions_delete` AFTER DELETE ON `taccount` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
@@ -250,7 +252,7 @@ CREATE TABLE `tevents` (
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `createdby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT = 0;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +274,7 @@ CREATE TABLE `ttransactions` (
   KEY `fk_account_to_idx` (`idreceiver`),
   CONSTRAINT `fk_taccount_from` FOREIGN KEY (`idsender`) REFERENCES `taccount` (`_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_taccount_to` FOREIGN KEY (`idreceiver`) REFERENCES `taccount` (`_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT = 0;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -283,7 +285,7 @@ CREATE TABLE `ttransactions` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `new_transaction` AFTER INSERT ON `ttransactions` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `new_transaction` AFTER INSERT ON `ttransactions` FOR EACH ROW BEGIN
 
     UPDATE `dbtransactions`.`taccount` as A
 	SET A.accountbalance = A.accountbalance - NEW.transferamount
@@ -308,7 +310,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `txn_update` BEFORE UPDATE ON `ttransactions` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `txn_update` BEFORE UPDATE ON `ttransactions` FOR EACH ROW BEGIN
 signal sqlstate '45000' set message_text = 'UPDATE on transaction prevented';
 END */;;
 DELIMITER ;
@@ -333,7 +335,7 @@ DROP TABLE IF EXISTS `taccount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `taccount` (
-  `_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `_id` smallint unsigned NOT NULL,
   `accountname` varchar(50) DEFAULT NULL,
   `accountbalance` int unsigned DEFAULT NULL,
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -344,7 +346,7 @@ CREATE TABLE `taccount` (
   KEY `fk_customer_name_idx` (`accountname`),
   KEY `fk_id_name_idx` (`_id`,`accountname`),
   CONSTRAINT `fk_id_name` FOREIGN KEY (`_id`, `accountname`) REFERENCES `tcustomer` (`_id`, `customername`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -355,12 +357,12 @@ CREATE TABLE `taccount` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `account_insert` AFTER INSERT ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `account_insert` AFTER INSERT ON `taccount` FOR EACH ROW BEGIN
   IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-    INSERT INTO `dbtransactions`.`taccount`(accountname, accountbalance) VALUES (NEW.accountname, NEW.accountbalance);
+    INSERT INTO `dbtransactions`.`taccount`(_id, accountname, accountbalance) VALUES (NEW._id, NEW.accountname, NEW.accountbalance);
   END IF;
 END */;;
 DELIMITER ;
@@ -377,13 +379,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `account_update` AFTER UPDATE ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `account_update` AFTER UPDATE ON `taccount` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-	IF NEW.accountname <> OLD.accountname or NEW.accountbalance <> OLD.accountbalance THEN
+	IF NEW._id <> OLD._id or NEW.accountname <> OLD.accountname or NEW.accountbalance <> OLD.accountbalance THEN
 		UPDATE `dbtransactions`.`taccount` SET
+        _id = NEW._id,
 		accountname = NEW.accountname,
 		accountbalance = NEW.accountbalance
 		WHERE _id = NEW._id;
@@ -404,7 +407,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `account_delete` AFTER DELETE ON `taccount` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `account_delete` AFTER DELETE ON `taccount` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
@@ -426,7 +429,7 @@ DROP TABLE IF EXISTS `tcustomer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tcustomer` (
-  `_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `_id` smallint unsigned NOT NULL,
   `customername` varchar(50) NOT NULL DEFAULT 'customer_auto',
   `customeraddress` varchar(255) DEFAULT NULL,
   `customerphone` varchar(20) DEFAULT '88776655',
@@ -435,7 +438,7 @@ CREATE TABLE `tcustomer` (
   `createdby` varchar(255) DEFAULT 'SYS',
   `lastmodifiedby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`,`customername`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -446,12 +449,12 @@ CREATE TABLE `tcustomer` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `acc_insert` AFTER INSERT ON `tcustomer` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `acc_insert` AFTER INSERT ON `tcustomer` FOR EACH ROW BEGIN
   IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-    INSERT INTO `dbcustomer`.`tcustomer`(customername, customeraddress, customerphone) VALUES (NEW.customername, NEW.customeraddress, NEW.customerphone);
+    INSERT INTO `dbcustomer`.`tcustomer`(_id, customername, customeraddress, customerphone) VALUES (NEW._id, NEW.customername, NEW.customeraddress, NEW.customerphone);
   END IF;
 END */;;
 DELIMITER ;
@@ -468,13 +471,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `acc_update` AFTER UPDATE ON `tcustomer` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `acc_update` AFTER UPDATE ON `tcustomer` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
     SET @trigger_flag = 1;
-	IF NEW.customername <> OLD.customername or NEW.customeraddress <> OLD.customeraddress or NEW.customerphone <> OLD.customerphone THEN
+	IF NEW._id <> OLD._id or NEW.customername <> OLD.customername or NEW.customeraddress <> OLD.customeraddress or NEW.customerphone <> OLD.customerphone THEN
 		UPDATE `dbcustomer`.`tcustomer` SET
+        _id = NEW._id,
 		customername = NEW.customername,
 		customeraddress = NEW.customeraddress,
         customerphone = NEW.customerphone
@@ -496,7 +500,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`chinmay`@`%`*/ /*!50003 TRIGGER `acc_delete` AFTER DELETE ON `tcustomer` FOR EACH ROW BEGIN
+/*!50003 CREATE TRIGGER `acc_delete` AFTER DELETE ON `tcustomer` FOR EACH ROW BEGIN
 IF @trigger_flag = 1 THEN
     SET @trigger_flag = NULL;
   ELSE
@@ -527,7 +531,7 @@ CREATE TABLE `tevents` (
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `createdby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT = 0;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -555,7 +559,7 @@ CREATE TABLE `tevents` (
   `createdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `createdby` varchar(255) DEFAULT 'SYS',
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) AUTO_INCREMENT = 0;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -567,4 +571,4 @@ CREATE TABLE `tevents` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-13  1:44:04
+-- Dump completed on 2020-07-17 12:54:45
