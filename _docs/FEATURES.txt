@@ -6,7 +6,7 @@
   1. The website has been redesigned completely using css framework MDBootstrap.
   2. Use minified version (.min.js) of _mybankAPIgateway.js to improve performance of js.
   3. API gateway supports every input field from the website.
-  4. Get rid of cutsomer type.
+  4. Get rid of customer type.
 
 - Database
   1. The database has been worked from ground up to compliment with the improved frontend and services.
