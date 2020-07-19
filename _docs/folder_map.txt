@@ -1,0 +1,108 @@
+|   .gitignore
+|   run_soaproject.bat
+|   
++---database
+|   |   dbconfig_customer.json
+|   |   json-simple-1.1.1.jar
+|   |   mysql-connector-java-8.0.21.jar
+|   |   run_jdatabase.bat
+|   |       
+|   \---sqlscripts
+|           create_database_all.sql
+|           reset_dbdata_all.sql
+|           reset_tevents_all.sql
+|           split.zip
+|           taccount.csv
+|           tcustomer.csv
+|           ttransactions.csv
+|           
++---eventclient
+|   |   dbconfig_eventclient.json
+|   |   pom.xml
+|   |   run_jevent.bat
+|   |       
+|   \---src
+|       +---main
+|           +---java
+|               \---jevent
+|                       jeventClient.java
+|
++---services
+|   +---account
+|   |   |   dbconfig_account.json
+|   |   |   pom.xml
+|   |   |
+|   |   \---src
+|   |       +---main
+|   |           +---java
+|   |               \---mybank
+|   |                       mainAccount.java
+|   |                       svcAccount.java
+|   |
+|   +---customer
+|   |   |   dbconfig_customer.json
+|   |   |   pom.xml
+|   |   |   
+|   |   \---src
+|   |       +---main
+|   |           +---java
+|   |               \---mybank
+|   |                       mainCustomer.java
+|   |                       svcCustomer.java
+|   |
+|   +---eventsync
+|   |   |   dbconfig_eventsync.json
+|   |   |   pom.xml
+|   |   |   
+|   |   \---src
+|   |       +---main
+|   |           +---java
+|   |               \---mybank
+|   |                       mainEventSync.java
+|   |                       svcEventSync.java
+|   |
+|   \---transactions
+|       |   dbconfig_transactions.json
+|       |   pom.xml
+|       |   
+|       \---src
+|           +---main
+|               \---java
+|                   \---mybank
+|                           mainTransactions.java
+|                           svcTransactions.java
+|
++---website
+|   |   accounts.html
+|   |   customer.html
+|   |   transactions.html
+|   |   
+|   +---css
+|   |       mdb.min.css
+|   |       mdb.min.css.map
+|   |       
+|   \---js
+|           angular.min.js
+|           angular.min.js.map
+|           mdb.min.js
+|           mdb.min.js.map
+|           _mybankAPIgateway.js
+|           _mybankAPIgateway.min.js
+|           
+\---_docs
+    |   01. Architecture Diagram.jpg
+    |   02. Class Diagram.jpg
+    |   03. Sequence Diagram - Customer.jpg
+    |   04. Sequence Diagram - Account.jpg
+    |   05. Sequence Diagram - Transactions.jpg
+    |   06. Event Lifecycle.jpg
+    |   Assignment_ServiceOrientedComputing_SOA.docx
+    |   FEATURES.txt
+    |   README.txt
+    |   folder_structure.txt
+    |
+    \---uml
+            Architecture.mdj
+            ClassDiagram.mdj
+            EventLifecycle.mdj
+            SequenceDiagramCustomer.mdj

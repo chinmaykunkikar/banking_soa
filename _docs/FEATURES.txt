@@ -1,0 +1,22 @@
+- Services
+  1. Update to latest jersey v2.31.
+  2. Update packaging of jdatabase and jevent jars to 'mybank' in pom.xml.
+
+- Frontend
+  1. The website has been redesigned completely using css framework MDBootstrap.
+  2. Use minified version (.min.js) of _mybankAPIgateway.js to improve performance of js.
+  3. API gateway supports every input field from the website.
+  4. Get rid of cutsomer type.
+
+- Database
+  1. The database has been worked from ground up to compliment with the improved frontend and services.
+  2. The dbsql utility class no longer needs a query type. It will automatically differentiate between read and write query and return appropriate results.
+  3. Use of triggers so that any transaction happening at dbtransactions will reflect in dbaccount database.
+  4. The tevents table will now know the source of the original query (a.k.a eventsource).
+
+- Miscellaneous
+  1. Much of the existing codebase was cleaned, formatted, and refactored.
+  2. Any redundant methods and imports have been removed.
+  3. The Command Prompt output is formatted.
+  4. New and efficient batch files, that will redirect output to a .log file to keep the output on the command prompt clean.
+  5. The entire work was done using github as version control.
