@@ -51,8 +51,8 @@ public class jeventClient {
 			System.out.println(output);
 		} catch (Exception e) {
 			System.out.println("Returning sendevent failure -");
-			System.out.println("[ {'error':'" + e.toString() + "'}]");
-			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]");
+			System.out.println("[{'error':'" + e.toString() + "'}]");
+			return sendjsonresponse("[{'error':'" + e.toString() + "'}]");
 		}
 		return sendjsonresponse(output);
 
@@ -76,7 +76,7 @@ public class jeventClient {
 			eventsource = (String) jsonObj.get("source");
 		} catch (Exception e) {
 			System.out.println("Returning sendevent failure -");
-			System.out.println("[ {'error':'" + e.toString() + "'}]");
+			System.out.println("[{'error':'" + e.toString() + "'}]");
 		}
 
 		// eventstatus = 0 means event is saved and needs to be processed
@@ -112,8 +112,8 @@ public class jeventClient {
 			System.out.println(output);
 		} catch (Exception e) {
 			System.out.println("Returning broadcast event failure");
-			System.out.println("[ {'error':'" + e.toString() + "'}]");
-			return sendjsonresponse("[ {'error':'" + e.toString() + "'}]");
+			System.out.println("[{'error':'" + e.toString() + "'}]");
+			return sendjsonresponse("[{'error':'" + e.toString() + "'}]");
 		}
 
 		return sendjsonresponse(output);

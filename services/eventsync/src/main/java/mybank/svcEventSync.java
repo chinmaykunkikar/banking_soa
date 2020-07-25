@@ -4,6 +4,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.core.MediaType;
 import javax.xml.ws.http.HTTPException;
 
 import javax.ws.rs.core.Response;
@@ -44,8 +45,8 @@ public class svcEventSync {
 	 */
 	@POST
 	@Path("/sync")
-	@Produces({ "application/json" })
-	@Consumes({ "application/json" })
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void syncEvent(String event) {
 		try {
 			// first save the query in local database
@@ -58,15 +59,16 @@ public class svcEventSync {
 
 	public void broadcastEvent(String event) {
 		System.out.println("Broadcasting event");
+		String uri = "";
 		// read the json event;
 		// get all services uri from dbConfig file
 		// check source destination
 		// send to all destination except source
 
-		String uri = "http://localhost:8082/mybank/account/syncevent";
+		uri = "http://localhost:8081/mybank/customer/syncevent";
 		eventclient.broadcastEvent(event, uri);
 
-		uri = "http://localhost:8081/mybank/customer/syncevent";
+		uri = "http://localhost:8082/mybank/account/syncevent";
 		eventclient.broadcastEvent(event, uri);
 
  		uri = "http://localhost:8083/mybank/transactions/syncevent";
